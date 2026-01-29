@@ -1,6 +1,7 @@
 package org.achymake.essentials.handlers;
 
 import org.achymake.essentials.Essentials;
+import org.achymake.essentials.data.Message;
 import org.achymake.essentials.entity.*;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -22,7 +23,10 @@ public class EntityHandler {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
-    private MaterialHandler getMaterials() {
+    private Message getMessage() {
+        return getInstance().getMessage();
+    }
+    private MaterialHandler getMaterialHandler() {
         return getInstance().getMaterialHandler();
     }
     private RandomHandler getRandomHandler() {
@@ -273,7 +277,7 @@ public class EntityHandler {
         var section = config.getConfigurationSection("chances");
         if (section != null) {
             for (var key : section.getKeys(false)) {
-                var chance = config.getDouble("chances." + key + ".chance");
+                var chance = section.getDouble(key + ".chance");
                 if (chance > 0) {
                     chances.put(key, chance);
                 }
@@ -307,7 +311,7 @@ public class EntityHandler {
             var section = "chances." + key;
             var name = config.getString(section + ".name");
             if (name != null) {
-                livingEntity.setCustomName(getInstance().getMessage().addColor(name));
+                livingEntity.setCustomName(getMessage().addColor(name));
                 setNamed(livingEntity);
             }
             if (config.isDouble(section + ".armor")) {
@@ -349,14 +353,14 @@ public class EntityHandler {
                 if (config.isString(section + ".main-hand.type") && config.isInt(section + ".main-hand.amount")) {
                     var itemName = config.getString(section + ".main-hand.type");
                     var itemAmount = config.getInt(section + ".main-hand.amount");
-                    var itemStack = getMaterials().getItemStack(itemName, itemAmount);
+                    var itemStack = getMaterialHandler().getItemStack(itemName, itemAmount);
                     if (itemStack != null) {
                         if (config.isConfigurationSection(section + ".main-hand.enchantments")) {
                             var itemMeta = itemStack.getItemMeta();
                             config.getConfigurationSection(section + ".main-hand.enchantments").getKeys(false).forEach(enchantment -> {
                                 if (!config.isInt(section + ".main-hand.enchantments." + enchantment))return;
                                 var enchantLvl = config.getInt(section + ".main-hand.enchantments." + enchantment);
-                                itemMeta.addEnchant(getMaterials().getEnchantment(enchantment), enchantLvl, true);
+                                itemMeta.addEnchant(getMaterialHandler().getEnchantment(enchantment), enchantLvl, true);
                             });
                             itemStack.setItemMeta(itemMeta);
                         }
@@ -369,14 +373,14 @@ public class EntityHandler {
                 if (config.isString(section + ".off-hand.type") && config.isInt(section + ".off-hand.amount")) {
                     var itemName = config.getString(section + ".off-hand.type");
                     var itemAmount = config.getInt(section + ".off-hand.amount");
-                    var itemStack = getMaterials().getItemStack(itemName, itemAmount);
+                    var itemStack = getMaterialHandler().getItemStack(itemName, itemAmount);
                     if (itemStack != null) {
                         if (config.isConfigurationSection(section + ".off-hand.enchantments")) {
                             var itemMeta = itemStack.getItemMeta();
                             config.getConfigurationSection(section + ".off-hand.enchantments").getKeys(false).forEach(enchantment -> {
                                 if (!config.isInt(section + ".off-hand.enchantments." + enchantment))return;
                                 var enchantLvl = config.getInt(section + ".off-hand.enchantments." + enchantment);
-                                itemMeta.addEnchant(getMaterials().getEnchantment(enchantment), enchantLvl, true);
+                                itemMeta.addEnchant(getMaterialHandler().getEnchantment(enchantment), enchantLvl, true);
                             });
                             itemStack.setItemMeta(itemMeta);
                         }
@@ -389,14 +393,14 @@ public class EntityHandler {
                 if (config.isString(section + ".helmet.type") && config.isInt(section + ".helmet.amount")) {
                     var itemName = config.getString(section + ".helmet.type");
                     var itemAmount = config.getInt(section + ".helmet.amount");
-                    var itemStack = getMaterials().getItemStack(itemName, itemAmount);
+                    var itemStack = getMaterialHandler().getItemStack(itemName, itemAmount);
                     if (itemStack != null) {
                         if (config.isConfigurationSection(section + ".helmet.enchantments")) {
                             var itemMeta = itemStack.getItemMeta();
                             config.getConfigurationSection(section + ".helmet.enchantments").getKeys(false).forEach(enchantment -> {
                                 if (!config.isInt(section + ".helmet.enchantments." + enchantment))return;
                                 var enchantLvl = config.getInt(section + ".helmet.enchantments." + enchantment);
-                                itemMeta.addEnchant(getMaterials().getEnchantment(enchantment), enchantLvl, true);
+                                itemMeta.addEnchant(getMaterialHandler().getEnchantment(enchantment), enchantLvl, true);
                             });
                             itemStack.setItemMeta(itemMeta);
                         }
@@ -409,14 +413,14 @@ public class EntityHandler {
                 if (config.isString(section + ".chestplate.type") && config.isInt(section + ".chestplate.amount")) {
                     var itemName = config.getString(section + ".chestplate.type");
                     var itemAmount = config.getInt(section + ".chestplate.amount");
-                    var itemStack = getMaterials().getItemStack(itemName, itemAmount);
+                    var itemStack = getMaterialHandler().getItemStack(itemName, itemAmount);
                     if (itemStack != null) {
                         if (config.isConfigurationSection(section + ".chestplate.enchantments")) {
                             var itemMeta = itemStack.getItemMeta();
                             config.getConfigurationSection(section + ".chestplate.enchantments").getKeys(false).forEach(enchantment -> {
                                 if (!config.isInt(section + ".chestplate.enchantments." + enchantment))return;
                                 var enchantLvl = config.getInt(section + ".chestplate.enchantments." + enchantment);
-                                itemMeta.addEnchant(getMaterials().getEnchantment(enchantment), enchantLvl, true);
+                                itemMeta.addEnchant(getMaterialHandler().getEnchantment(enchantment), enchantLvl, true);
                             });
                             itemStack.setItemMeta(itemMeta);
                         }
@@ -429,14 +433,14 @@ public class EntityHandler {
                 if (config.isString(section + ".leggings.type") && config.isInt(section + ".leggings.amount")) {
                     var itemName = config.getString(section + ".leggings.type");
                     var itemAmount = config.getInt(section + ".leggings.amount");
-                    var itemStack = getMaterials().getItemStack(itemName, itemAmount);
+                    var itemStack = getMaterialHandler().getItemStack(itemName, itemAmount);
                     if (itemStack != null) {
                         if (config.isConfigurationSection(section + ".leggings.enchantments")) {
                             var itemMeta = itemStack.getItemMeta();
                             config.getConfigurationSection(section + ".leggings.enchantments").getKeys(false).forEach(enchantment -> {
                                 if (!config.isInt(section + ".leggings.enchantments." + enchantment))return;
                                 var enchantLvl = config.getInt(section + ".leggings.enchantments." + enchantment);
-                                itemMeta.addEnchant(getMaterials().getEnchantment(enchantment), enchantLvl, true);
+                                itemMeta.addEnchant(getMaterialHandler().getEnchantment(enchantment), enchantLvl, true);
                             });
                             itemStack.setItemMeta(itemMeta);
                         }
@@ -449,14 +453,14 @@ public class EntityHandler {
                 if (config.isString(section + ".boots.type") && config.isInt(section + ".boots.amount")) {
                     var itemName = config.getString(section + ".boots.type");
                     var itemAmount = config.getInt(section + ".boots.amount");
-                    var itemStack = getMaterials().getItemStack(itemName, itemAmount);
+                    var itemStack = getMaterialHandler().getItemStack(itemName, itemAmount);
                     if (itemStack != null) {
                         if (config.isConfigurationSection(section + ".boots.enchantments")) {
                             var itemMeta = itemStack.getItemMeta();
                             config.getConfigurationSection(section + ".boots.enchantments").getKeys(false).forEach(enchantment -> {
                                 if (!config.isInt(section + ".boots.enchantments." + enchantment))return;
                                 var enchantLvl = config.getInt(section + ".boots.enchantments." + enchantment);
-                                itemMeta.addEnchant(getMaterials().getEnchantment(enchantment), enchantLvl, true);
+                                itemMeta.addEnchant(getMaterialHandler().getEnchantment(enchantment), enchantLvl, true);
                             });
                             itemStack.setItemMeta(itemMeta);
                         }
@@ -467,6 +471,7 @@ public class EntityHandler {
                     }
                 }
             }
+            break;
         }
     }
     public double getAttributeValue(LivingEntity livingEntity, Attribute attribute) {

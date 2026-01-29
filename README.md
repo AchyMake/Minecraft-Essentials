@@ -1,4 +1,4 @@
-JitPack.io Check Repository = https://jitpack.io/#AchyMake/Essentials
+JitPack.io Check Repository = https://jitpack.io/#AchyMake/Minecraft-Essentials
 ```xml
     <repositories>
         <repository>
@@ -10,7 +10,7 @@ JitPack.io Check Repository = https://jitpack.io/#AchyMake/Essentials
     <dependencies>
         <dependency>
             <groupId>com.github.AchyMake</groupId>
-            <artifactId>Essentials</artifactId>
+            <artifactId>Minecraft-Essentials</artifactId>
             <version>LATEST</version>
             <scope>provided</scope>
         </dependency>

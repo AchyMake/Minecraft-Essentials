@@ -10,6 +10,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class EconomyHandler {
@@ -88,7 +89,7 @@ public class EconomyHandler {
      * @return set map offlinePlayer, double
      * @since many moons ago
      */
-    public ArrayList<Map.Entry<OfflinePlayer, Double>> getTopAccounts() {
+    public List<Map.Entry<OfflinePlayer, Double>> getTopAccounts() {
         var accounts = new HashMap<OfflinePlayer, Double>();
         for (var offlinePlayer : getInstance().getOfflinePlayers()) {
             if (!getUserdata().isBanned(offlinePlayer) || !getUserdata().isDisabled(offlinePlayer)) {
@@ -99,14 +100,14 @@ public class EconomyHandler {
         }
         var listed = new ArrayList<>(accounts.entrySet());
         listed.sort(Collections.reverseOrder(Map.Entry.comparingByValue()));
-        return listed;
+        return listed.stream().limit(10).toList();
     }
     /**
      * get set map string, double
      * @return set map string, double
      * @since many moons ago
      */
-    public ArrayList<Map.Entry<String, Double>> getTopBanks() {
+    public List<Map.Entry<String, Double>> getTopBanks() {
         var bankAccounts = new HashMap<String, Double>();
         for (var bankName : getBank().getListed()) {
             if (getBank().has(bankName, 0.01)) {
@@ -115,7 +116,7 @@ public class EconomyHandler {
         }
         var listed = new ArrayList<>(bankAccounts.entrySet());
         listed.sort(Collections.reverseOrder(Map.Entry.comparingByValue()));
-        return listed;
+        return listed.stream().limit(10).toList();
     }
     public String format(double amount) {
         return new DecimalFormat(getConfig().getString("economy.format")).format(amount);
