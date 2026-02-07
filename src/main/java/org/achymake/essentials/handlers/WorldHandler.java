@@ -3,10 +3,7 @@ package org.achymake.essentials.handlers;
 import org.achymake.essentials.Essentials;
 import org.achymake.essentials.data.Message;
 import org.achymake.essentials.data.Userdata;
-import org.bukkit.Location;
-import org.bukkit.Particle;
-import org.bukkit.Sound;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Entity;
@@ -146,5 +143,11 @@ public class WorldHandler {
         var world = location.getWorld();
         if (world == null)return;
         world.playSound(location, Sound.valueOf(soundType), (float) volume, (float) pitch);
+    }
+    public boolean isPVP(World world) {
+        var pvp = world.getGameRuleValue(GameRule.PVP);
+        if (pvp != null) {
+            return pvp;
+        } else return false;
     }
 }
