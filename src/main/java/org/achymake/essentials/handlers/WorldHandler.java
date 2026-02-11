@@ -6,7 +6,6 @@ import org.achymake.essentials.data.Userdata;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -27,7 +26,7 @@ public class WorldHandler {
     private RandomHandler getRandomHandler() {
         return getInstance().getRandomHandler();
     }
-    private ScheduleHandler getScheduler() {
+    private ScheduleHandler getScheduleHandler() {
         return getInstance().getScheduleHandler();
     }
     private Message getMessage() {
@@ -93,7 +92,7 @@ public class WorldHandler {
             }
             if (seconds > 0) {
                 getMessage().sendActionBar(player, getMessage().get("events.teleport.post", String.valueOf(seconds)));
-                var taskID = getInstance().getScheduleHandler().runLater(() -> {
+                var taskID = getScheduleHandler().runLater(() -> {
                     getMessage().sendActionBar(player, getMessage().get("events.teleport.success", name));
                     player.teleport(location);
                     getUserdata().removeTask(player, "teleport");
@@ -113,7 +112,7 @@ public class WorldHandler {
     public void randomTeleport(Player player) {
         getMessage().sendActionBar(player, getMessage().get("commands.rtp.post-teleport"));
         var block = highestRandomBlock(get(getConfig().getString("commands.rtp.world")), getConfig().getInt("commands.rtp.spread"));
-        var taskID = getScheduler().runLater(() -> {
+        var taskID = getScheduleHandler().runLater(() -> {
             if (block.isLiquid()) {
                 getMessage().sendActionBar(player, getMessage().get("commands.rtp.liquid"));
                 randomTeleport(player);

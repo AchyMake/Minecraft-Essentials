@@ -2,11 +2,12 @@ package org.achymake.essentials.providers;
 
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.model.group.Group;
+import net.luckperms.api.model.group.GroupManager;
+import net.luckperms.api.model.user.UserManager;
 import org.achymake.essentials.Essentials;
 import org.bukkit.entity.Player;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class LuckPermsProvider {
     private Essentials getInstance() {
@@ -32,32 +33,31 @@ public class LuckPermsProvider {
     public Group getPlayerGroup(Player player) {
         var groupName = getGroupName(player);
         if (groupName != null) {
-            if (getLuckPerms().getGroupManager().isLoaded(groupName)) {
-                return getLuckPerms().getGroupManager().getGroup(groupName);
-            } else return (Group) getLuckPerms().getGroupManager().loadGroup(groupName);
+            if (getGroupManager().isLoaded(groupName)) {
+                return getGroupManager().getGroup(groupName);
+            } else return (Group) getGroupManager().loadGroup(groupName);
         } else return null;
     }
     public String getGroupName(Player player) {
-        var user = getLuckPerms().getUserManager().getUser(player.getUniqueId());
+        var user = getUserManager().getUser(player.getUniqueId());
         if (user != null) {
             return user.getPrimaryGroup();
         } else return null;
     }
-    public Set<Map.Entry<Player, Integer>> getWeightedPlayers() {
+    public List<Map.Entry<Player, Integer>> getWeightedPlayers() {
         var weights = new HashMap<Player, Integer>();
         for (var player : getInstance().getOnlinePlayers()) {
             weights.put(player, getWeight(player));
         }
-        var list = new ArrayList<>(weights.entrySet());
-        list.sort(Map.Entry.comparingByValue());
-        var result = new LinkedHashMap<Player, Integer>();
-        result.entrySet().stream()
-                .sorted(Map.Entry.comparingByValue())
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
-        for (var entry : list) {
-            result.put(entry.getKey(), entry.getValue());
-        }
-        return result.entrySet();
+        var listed = new ArrayList<>(weights.entrySet());
+        listed.sort(Collections.reverseOrder(Map.Entry.comparingByValue()));
+        return listed.stream().toList();
+    }
+    public UserManager getUserManager() {
+        return getLuckPerms().getUserManager();
+    }
+    public GroupManager getGroupManager() {
+        return getLuckPerms().getGroupManager();
     }
     public LuckPerms getLuckPerms() {
         return net.luckperms.api.LuckPermsProvider.get();

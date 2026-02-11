@@ -6,12 +6,12 @@
 
     <groupId>org.achymake</groupId>
     <artifactId>Essentials</artifactId>
-    <version>1.1.37</version>
+    <version>1.1.38</version>
     <packaging>jar</packaging>
 
     <name>Essentials</name>
     <description>Provides Economy, Homes, etc.</description>
-    <url>https://github.com/AchyMake/Essentials</url>
+    <url>https://github.com/AchyMake/Minecraft-Essentials</url>
 
     <properties>
         <java.version>21</java.version>
@@ -89,7 +89,7 @@
         <dependency>
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>
-            <version>2.11.7</version>
+            <version>2.12.2</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

@@ -227,7 +227,10 @@ public final class Essentials extends JavaPlugin {
         new PlayerQuit();
         new PlayerRespawn();
         new PlayerShearEntity();
-        new PlayerSpawnLocation();
+        if (!isBukkit()) {
+            new AsyncPlayerSpawnLocation();
+            new PlayerShearBlock();
+        } else new PlayerSpawnLocation();
         new PlayerTakeLecternBook();
         new PlayerTeleport();
         new PlayerToggleFlight();
@@ -237,9 +240,6 @@ public final class Essentials extends JavaPlugin {
         new ProjectileLaunch();
         new SignChange();
         new VehicleCreate();
-        if (!isBukkit()) {
-            new PlayerShearBlock();
-        }
     }
     public void reload() {
         getTablistHandler().disable();
