@@ -8,14 +8,12 @@ import org.bukkit.block.data.Lightable;
 import org.bukkit.block.data.type.RedstoneWallTorch;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.SkullMeta;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public class MaterialHandler {
     private Essentials getInstance() {

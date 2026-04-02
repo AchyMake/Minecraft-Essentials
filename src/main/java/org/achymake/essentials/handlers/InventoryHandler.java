@@ -18,7 +18,7 @@ public class InventoryHandler {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
-    private MaterialHandler getMaterials() {
+    private MaterialHandler getMaterialHandler() {
         return getInstance().getMaterialHandler();
     }
     private PaperHandler getPaperHandler() {
@@ -73,8 +73,8 @@ public class InventoryHandler {
         return player.openWorkbench(null, true);
     }
     public boolean setHelmet(PlayerInventory inventory, ItemStack itemStack) {
-        if (getMaterials().isAir(inventory.getHelmet())) {
-            inventory.setHelmet(getMaterials().getItemStack(itemStack, 1));
+        if (getMaterialHandler().isAir(inventory.getHelmet())) {
+            inventory.setHelmet(getMaterialHandler().getItemStack(itemStack, 1));
             return true;
         } else return false;
     }
