@@ -7,7 +7,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Worth {
     private Essentials getInstance() {
@@ -26,8 +27,10 @@ public class Worth {
      * @return set string
      * @since many moons ago
      */
-    public Set<String> getListed() {
-        return config.getKeys(false);
+    public List<String> getListed() {
+        var listed = new ArrayList<>(config.getKeys(false).stream().toList());
+        listed.sort(String::compareTo);
+        return listed;
     }
     /**
      * if item is listed

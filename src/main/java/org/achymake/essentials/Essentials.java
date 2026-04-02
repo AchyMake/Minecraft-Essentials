@@ -157,6 +157,7 @@ public final class Essentials extends JavaPlugin {
         new SkullCommand();
         new SmithingCommand();
         new SpawnCommand();
+        new SpawnerCommand();
         new StonecutterCommand();
         new StoreCommand();
         new TimeCommand();

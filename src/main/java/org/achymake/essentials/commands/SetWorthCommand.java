@@ -5,6 +5,7 @@ import org.achymake.essentials.data.Message;
 import org.achymake.essentials.data.Worth;
 import org.achymake.essentials.handlers.EconomyHandler;
 import org.achymake.essentials.handlers.MaterialHandler;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -37,18 +38,27 @@ public class SetWorthCommand implements CommandExecutor, TabCompleter {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player player) {
             if (args.length == 1) {
-                var heldItem = player.getInventory().getItemInMainHand();
-                if (!getMaterialHandler().isAir(heldItem)) {
-                    var material = heldItem.getType();
-                    var itemName = getMessage().toTitleCase(material.toString());
-                    var value = Double.parseDouble(args[0]);
-                    if (getWorth().setWorth(material, value)) {
-                        if (getWorth().isListed(material)) {
-                            player.sendMessage(getMessage().get("commands.setworth.enable", itemName, getEconomy().currency() + getEconomy().format(getWorth().get(material))));
-                        } else player.sendMessage(getMessage().get("commands.setworth.disable", itemName));
-                    } else player.sendMessage(getMessage().get("error.file.exception", getWorth().getFile().getName()));
-                } else player.sendMessage(getMessage().get("error.item.invalid"));
+                var materialName = args[0].toUpperCase();
+                if (getWorth().setWorth(getMaterialHandler().get(materialName), 0)) {
+                    player.sendMessage(getMessage().get("commands.setworth.disable", getMessage().toTitleCase(materialName)));
+                } else player.sendMessage(getMessage().get("error.file.exception", getWorth().getFile().getName()));
                 return true;
+            } else if (args.length == 2) {
+                var materialName = args[0].toUpperCase();
+                var material = getMaterialHandler().get(materialName);
+                if (material != null) {
+                    try {
+                        var worth = Double.parseDouble(args[1]);
+                        if (getWorth().setWorth(material, worth)) {
+                            if (getWorth().isListed(material)) {
+                                player.sendMessage(getMessage().get("commands.setworth.enable", getMessage().toTitleCase(materialName), getEconomy().currency() + getEconomy().format(getWorth().get(material))));
+                            } else player.sendMessage(getMessage().get("commands.setworth.disable", getMessage().toTitleCase(materialName)));
+                        } else player.sendMessage(getMessage().get("error.file.exception", getWorth().getFile().getName()));
+                        return true;
+                    } catch (NumberFormatException | NullPointerException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
             }
         }
         return false;
@@ -56,14 +66,19 @@ public class SetWorthCommand implements CommandExecutor, TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
         var commands = new ArrayList<String>();
-        if (sender instanceof Player player) {
-            if (!player.getInventory().getItemInMainHand().isEmpty()) {
-                if (args.length == 1) {
-                    commands.add("0.25");
-                    commands.add("0.50");
-                    commands.add("0.75");
-                    commands.add("1.00");
+        if (sender instanceof Player) {
+            if (args.length == 1) {
+                for (var material : Material.values()) {
+                    var itemName = material.name().toLowerCase();
+                    if (itemName.startsWith(args[0])) {
+                        commands.add(itemName);
+                    }
                 }
+            } else if (args.length == 2) {
+                commands.add("0.25");
+                commands.add("0.50");
+                commands.add("0.75");
+                commands.add("1.00");
             }
         }
         return commands;

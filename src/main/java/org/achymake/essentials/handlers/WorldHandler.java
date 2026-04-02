@@ -55,7 +55,7 @@ public class WorldHandler {
      * @param itemStack itemStack
      * @since many moons ago
      */
-    public Item spawnItem(Location location, ItemStack itemStack) {
+    public Item dropItemStack(Location location, ItemStack itemStack) {
         var world = location.getWorld();
         if (world != null) {
             var item = world.createEntity(location, Item.class);

@@ -304,6 +304,11 @@ commands:
     permission: essentials.command.spawn
     permission-message: You do not have the permissions to execute the command
     usage: /help
+  spawner:
+    description: spawner command
+    permission: essentials.command.spawner
+    permission-message: You do not have the permissions to execute the command
+    usage: /help
   stonecutter:
     description: opens stonecutter by command
     permission: essentials.command.stonecutter
@@ -809,6 +814,12 @@ permissions:
   essentials.command.spawn.exempt:
     description: teleports to spawn
     default: op
+  essentials.command.spawner:
+    description: spawner command
+    default: op
+  essentials.command.spawner.give:
+    description: spawner give command
+    default: op
   essentials.command.stonecutter:
     description: opens stonecutter by command
     default: op
@@ -973,6 +984,9 @@ permissions:
     default: op
   essentials.event.sign.color:
     description: uses color codes for sign
+    default: op
+  essentials.event.silk_touch.spawner:
+    description: drops spawner using silk touch
     default: op
   essentials.event.quit.message:
     description: sends quit message

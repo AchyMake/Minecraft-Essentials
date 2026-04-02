@@ -1,17 +1,21 @@
 package org.achymake.essentials.handlers;
 
 import org.achymake.essentials.Essentials;
+import org.achymake.essentials.data.Message;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Lightable;
 import org.bukkit.block.data.type.RedstoneWallTorch;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.*;
 
@@ -19,8 +23,20 @@ public class MaterialHandler {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
+    private FileConfiguration getConfig() {
+        return getInstance().getConfig();
+    }
     private WorldHandler getWorldHandler() {
         return getInstance().getWorldHandler();
+    }
+    private Message getMessage() {
+        return getInstance().getMessage();
+    }
+    public PersistentDataContainer getData(ItemStack itemStack) {
+        var meta = itemStack.getItemMeta();
+        if (meta != null) {
+            return meta.getPersistentDataContainer();
+        } else return null;
     }
     /**
      * get material
@@ -115,7 +131,7 @@ public class MaterialHandler {
         var rest = player.getInventory().addItem(itemStack).values();
         if (rest.isEmpty())return;
         var location = player.getLocation();
-        rest.forEach(itemStacks -> getWorldHandler().spawnItem(location, itemStack));
+        rest.forEach(itemStacks -> getWorldHandler().dropItemStack(location, itemStack));
     }
     /**
      * give itemStack
@@ -161,6 +177,25 @@ public class MaterialHandler {
      */
     public boolean isAir(ItemStack itemStack) {
         return itemStack == null || itemStack.getType().equals(get("air"));
+    }
+    public ItemStack getSpawner(String entityType, int amount) {
+        var itemStack = getItemStack("spawner", amount);
+        var itemMeta = itemStack.getItemMeta();
+        if (getConfig().isList("spawner.lore")) {
+            var listed = new ArrayList<String>();
+            for(var string : getConfig().getStringList("spawner.lore")) {
+                listed.add(getMessage().addColor(string));
+            }
+            itemMeta.setLore(listed);
+        }
+        var itemDisplayName = getConfig().getString("spawner.display");
+        if (itemDisplayName != null) {
+            itemMeta.setDisplayName(getMessage().addColor(itemDisplayName.replace("%entity_type%", getMessage().toTitleCase(entityType))));
+        }
+        itemMeta.getPersistentDataContainer().set(getInstance().getKey("entity_type"), PersistentDataType.STRING, entityType.toUpperCase());
+        itemMeta.addItemFlags(ItemFlag.HIDE_ADDITIONAL_TOOLTIP);
+        itemStack.setItemMeta(itemMeta);
+        return itemStack;
     }
     public BlockData disableTorch(BlockData blockData) {
         if (blockData instanceof RedstoneWallTorch redstoneWallTorch) {

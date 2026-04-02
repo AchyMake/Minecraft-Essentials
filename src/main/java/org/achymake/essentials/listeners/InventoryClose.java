@@ -48,7 +48,7 @@ public class InventoryClose implements Listener {
         event.getInventory().forEach(itemStack -> {
             if (itemStack == null)return;
             var material = itemStack.getType();
-            if (getWorth().isListed(material)) {
+            if (getWorth().isListed(material) && !itemStack.getItemMeta().hasEnchants()) {
                 var amount = itemStack.getAmount();
                 var worth = getWorth().get(material);
                 var result = worth * amount;
