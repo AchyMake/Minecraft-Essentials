@@ -1,12 +1,20 @@
 package org.achymake.essentials.handlers;
 
 import org.achymake.essentials.Essentials;
+import org.achymake.essentials.data.Message;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
+import java.util.HashMap;
+
 public class InventoryHandler {
+    private final HashMap<Player, Inventory> inventories = new HashMap<>();
+    public HashMap<Player, Inventory> getInventories() {
+        return inventories;
+    }
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
@@ -18,6 +26,12 @@ public class InventoryHandler {
     }
     private boolean isBukkit() {
         return getInstance().isBukkit();
+    }
+    private Message getMessage() {
+        return getInstance().getMessage();
+    }
+    public Inventory create(int size, String title) {
+        return getInstance().getServer().createInventory(null, size, getMessage().addColor(title));
     }
     public InventoryView openAnvil(Player player) {
         if (!isBukkit()) {

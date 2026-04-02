@@ -32,15 +32,17 @@ public record Board(Player getPlayer) implements Runnable {
     }
     private String getTitle() {
         var world = getPlayer().getWorld();
-        if (!getScoreboardHandler().hasTitle(world.getName())) {
+        var worldName = world.getName();
+        if (!getScoreboardHandler().hasTitle(worldName)) {
             return getMessage().addPlaceholder(getPlayer(), getScoreboardHandler().getTitle());
-        } else return getMessage().addPlaceholder(getPlayer(), getScoreboardHandler().getTitle(world.getName()));
+        } else return getMessage().addPlaceholder(getPlayer(), getScoreboardHandler().getTitle(worldName));
     }
     private List<String> getLines() {
         var listed = new ArrayList<String>();
         var world = getPlayer().getWorld();
-        if (getScoreboardHandler().isLine(world.getName())) {
-            for (var line : getScoreboardHandler().getLines(world.getName())) {
+        var worldName = world.getName();
+        if (getScoreboardHandler().isLine(worldName)) {
+            for (var line : getScoreboardHandler().getLines(worldName)) {
                 listed.add(getMessage().addPlaceholder(getPlayer(), line));
             }
         } else if (getScoreboardHandler().isLine()) {

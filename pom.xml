@@ -6,7 +6,7 @@
 
     <groupId>org.achymake</groupId>
     <artifactId>Essentials</artifactId>
-    <version>1.1.38</version>
+    <version>1.1.39</version>
     <packaging>jar</packaging>
 
     <name>Essentials</name>
@@ -81,15 +81,15 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>net.luckperms</groupId>
-            <artifactId>api</artifactId>
-            <version>5.5</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>
             <version>2.12.2</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.luckperms</groupId>
+            <artifactId>api</artifactId>
+            <version>5.5</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

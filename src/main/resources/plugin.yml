@@ -759,6 +759,12 @@ permissions:
     description: check rules
     default: op
   essentials.command.sell:
+    description: open sell inventory
+    default: op
+  essentials.command.sell.other:
+    description: open sell inventory for others
+    default: op
+  essentials.command.sell.exempt:
     description: sell items
     default: op
   essentials.command.sethome:

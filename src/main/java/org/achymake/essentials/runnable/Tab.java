@@ -17,27 +17,30 @@ public record Tab(Player getPlayer) implements Runnable {
     }
     private String getHeader() {
         var world = getPlayer().getWorld();
-        if (!getTablistHandler().hasHeaderLines(world.getName())) {
+        var worldName = world.getName();
+        if (!getTablistHandler().hasHeaderLines(worldName)) {
             if (!getTablistHandler().hasHeaderLines()) {
                 return null;
             } else return getMessage().addPlaceholder(getPlayer(), getMessage().toString(getTablistHandler().getHeaderLines()));
-        } else return getMessage().addPlaceholder(getPlayer(), getMessage().toString(getTablistHandler().getHeaderLines(world.getName())));
+        } else return getMessage().addPlaceholder(getPlayer(), getMessage().toString(getTablistHandler().getHeaderLines(worldName)));
     }
     private String getName() {
         var world = getPlayer().getWorld();
-        if (!getTablistHandler().hasName(world.getName())) {
+        var worldName = world.getName();
+        if (!getTablistHandler().hasName(worldName)) {
             if (!getTablistHandler().hasName()) {
                 return getPlayer().getName();
             } else return getMessage().addPlaceholder(getPlayer(), getTablistHandler().getName());
-        } else return getMessage().addPlaceholder(getPlayer(), getTablistHandler().getName(world.getName()));
+        } else return getMessage().addPlaceholder(getPlayer(), getTablistHandler().getName(worldName));
     }
     private String getFooter() {
         var world = getPlayer().getWorld();
-        if (!getTablistHandler().hasFooterLines(world.getName())) {
+        var worldName = world.getName();
+        if (!getTablistHandler().hasFooterLines(worldName)) {
             if (!getTablistHandler().hasFooterLines()) {
                 return null;
             } else return getMessage().addPlaceholder(getPlayer(), getMessage().toString(getTablistHandler().getFooterLines()));
-        } else return getMessage().addPlaceholder(getPlayer(), getMessage().toString(getTablistHandler().getFooterLines(world.getName())));
+        } else return getMessage().addPlaceholder(getPlayer(), getMessage().toString(getTablistHandler().getFooterLines(worldName)));
     }
     private void setHeader(String value) {
         var header = getPlayer().getPlayerListHeader();

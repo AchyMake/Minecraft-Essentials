@@ -474,9 +474,10 @@ public class Message {
         config.set("commands.rtp.teleport", "&6Teleporting to&f random");
         config.set("commands.rules.sender", "&6You sent rules message to&f {0}");
         config.set("commands.rules.exempt", "&cYou are not allowed to send rules to&f {0}");
+        config.set("commands.sell.title", "&0Place items here to Sell");
         config.set("commands.sell.sellable", "&6You sold&f {0} {1}&6 for&a {2}");
-        config.set("commands.sell.unsellable", "{0}&c is not able to sell");
-        config.set("commands.sell.insufficient", "&cYou do not have enough&f {0}");
+        config.set("commands.sell.sender", "&6You opened sell inventory for&f {0}");
+        config.set("commands.sell.exempt", "&cYou are not allowed to open sell inventory for&f {0}");
         config.set("commands.sethome.success", "{0}&6 has been set");
         config.set("commands.sethome.limit-reached", "&cYou have reached your limit of&f {0}&c homes");
         config.set("commands.sethome.bed", "&cYou can not sethome for&f bed");

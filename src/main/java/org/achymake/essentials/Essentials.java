@@ -208,6 +208,7 @@ public final class Essentials extends JavaPlugin {
         new EntityTransform();
         new HangingBreakByEntity();
         new HangingPlace();
+        new InventoryClose();
         new NotePlay();
         new PlayerBucketEmpty();
         new PlayerBucketEntity();
@@ -387,9 +388,6 @@ public final class Essentials extends JavaPlugin {
     public String getMinecraftProvider() {
         return getServer().getName();
     }
-    public boolean isBukkit() {
-        return getMinecraftProvider().equals("Bukkit") || getMinecraftProvider().equals("CraftBukkit");
-    }
     public Player getPlayer(String username) {
         return getServer().getPlayerExact(username);
     }
@@ -401,5 +399,10 @@ public final class Essentials extends JavaPlugin {
     }
     public OfflinePlayer getOfflinePlayer(String username) {
         return getServer().getOfflinePlayer(username);
+    }
+    public boolean isBukkit() {
+        return getMinecraftProvider().equals("Spigot") ||
+                getMinecraftProvider().equals("Bukkit") ||
+                getMinecraftProvider().equals("CraftBukkit");
     }
 }

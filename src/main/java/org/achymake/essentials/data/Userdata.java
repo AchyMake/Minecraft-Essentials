@@ -988,6 +988,7 @@ public class Userdata {
         if (player.isInvulnerable()) {
             player.setInvulnerable(false);
         }
+        getInstance().getInventoryHandler().getInventories().remove(player);
     }
     public void disable() {
         getInstance().getOnlinePlayers().forEach(this::disable);

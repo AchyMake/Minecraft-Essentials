@@ -46,7 +46,7 @@ public class PlaceholderProvider extends PlaceholderExpansion {
                     return player.getName();
                 }
                 case "display_name" -> {
-                    return instance.getUserdata().getDisplayName(player);
+                    return userdata.getDisplayName(player);
                 }
                 case "account" -> {
                     return economy.currency() + economy.format(economy.getAccount(player));
