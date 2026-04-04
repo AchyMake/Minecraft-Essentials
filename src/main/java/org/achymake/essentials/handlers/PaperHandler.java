@@ -14,7 +14,7 @@ public class PaperHandler {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
-    private MaterialHandler getMaterials() {
+    private MaterialHandler getMaterialHandler() {
         return getInstance().getMaterialHandler();
     }
     public InventoryView openAnvil(Player player) {
@@ -39,7 +39,7 @@ public class PaperHandler {
         return NumberFormat.blank();
     }
     public ItemStack getCustomHead(String skullName, String key, int amount) {
-        var skullItem = getMaterials().getItemStack("player_head", amount);
+        var skullItem = getMaterialHandler().getItemStack("player_head", amount);
         var skullMeta = (SkullMeta) skullItem.getItemMeta();
         if (16 >= skullName.length()) {
             var profile = getInstance().getServer().createProfile(UUID.randomUUID(), skullName);

@@ -16,11 +16,11 @@ public class SetSpawnCommand implements CommandExecutor, TabCompleter {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
-    private Spawn getSpawn() {
-        return getInstance().getSpawn();
-    }
     private Message getMessage() {
         return getInstance().getMessage();
+    }
+    private Spawn getSpawn() {
+        return getInstance().getSpawn();
     }
     public SetSpawnCommand() {
         getInstance().getCommand("setspawn").setExecutor(this);

@@ -17,13 +17,13 @@ public class TPDenyCommand implements CommandExecutor, TabCompleter {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
-    private Userdata getUserdata() {
-        return getInstance().getUserdata();
-    }
     private Message getMessage() {
         return getInstance().getMessage();
     }
-    private ScheduleHandler getScheduler() {
+    private Userdata getUserdata() {
+        return getInstance().getUserdata();
+    }
+    private ScheduleHandler getScheduleHandler() {
         return getInstance().getScheduleHandler();
     }
     public TPDenyCommand() {
@@ -38,8 +38,8 @@ public class TPDenyCommand implements CommandExecutor, TabCompleter {
                         var target = getUserdata().getTpaFrom(player);
                         if (target != null) {
                             var tpaTask = getUserdata().getTaskID(target, "tpa");
-                            if (getScheduler().isQueued(tpaTask)) {
-                                getScheduler().cancel(tpaTask);
+                            if (getScheduleHandler().isQueued(tpaTask)) {
+                                getScheduleHandler().cancel(tpaTask);
                                 getUserdata().setTpaSent(target, null);
                                 getUserdata().removeTask(target, "tpa");
                                 getUserdata().setTpaFrom(player, null);
@@ -54,8 +54,8 @@ public class TPDenyCommand implements CommandExecutor, TabCompleter {
                         var target = getUserdata().getTpaHereFrom(player);
                         if (target != null) {
                             var tpaHereTask = getUserdata().getTaskID(target, "tpahere");
-                            if (getScheduler().isQueued(tpaHereTask)) {
-                                getScheduler().cancel(tpaHereTask);
+                            if (getScheduleHandler().isQueued(tpaHereTask)) {
+                                getScheduleHandler().cancel(tpaHereTask);
                                 getUserdata().setTpaHereSent(target, null);
                                 getUserdata().removeTask(target, "tpahere");
                                 getUserdata().setTpaHereFrom(player, null);

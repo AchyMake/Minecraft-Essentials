@@ -21,11 +21,11 @@ public class RulesCommand implements CommandExecutor, TabCompleter {
     private FileConfiguration getConfig() {
         return getInstance().getConfig();
     }
-    private Userdata getUserdata() {
-        return getInstance().getUserdata();
-    }
     private Message getMessage() {
         return getInstance().getMessage();
+    }
+    private Userdata getUserdata() {
+        return getInstance().getUserdata();
     }
     public RulesCommand() {
         getInstance().getCommand("rules").setExecutor(this);

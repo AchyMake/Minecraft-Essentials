@@ -20,20 +20,20 @@ public class PlayerDeath implements Listener {
     private FileConfiguration getConfig() {
         return getInstance().getConfig();
     }
+    private Message getMessage() {
+        return getInstance().getMessage();
+    }
     private Userdata getUserdata() {
         return getInstance().getUserdata();
     }
-    private EconomyHandler getEconomy() {
+    private EconomyHandler getEconomyHandler() {
         return getInstance().getEconomyHandler();
     }
-    private MaterialHandler getMaterials() {
+    private MaterialHandler getMaterialHandler() {
         return getInstance().getMaterialHandler();
     }
     private RandomHandler getRandomHandler() {
         return getInstance().getRandomHandler();
-    }
-    private Message getMessage() {
-        return getInstance().getMessage();
     }
     private PluginManager getPluginManager() {
         return getInstance().getPluginManager();
@@ -48,15 +48,15 @@ public class PlayerDeath implements Listener {
         getUserdata().setLocation(player, location, "death");
         if (getConfig().getBoolean("deaths.drop-player-head.enable")) {
             if (!getRandomHandler().isTrue(getConfig().getDouble("deaths.drop-player-head.chance")))return;
-            event.getDrops().add(getMaterials().getPlayerHead(player, 1));
+            event.getDrops().add(getMaterialHandler().getPlayerHead(player, 1));
         }
         if (getConfig().getBoolean("deaths.drop-economy.enable")) {
             var min = getConfig().getDouble("deaths.drop-economy.min");
             var max = getConfig().getDouble("deaths.drop-economy.max");
             var lost = getRandomHandler().nextDouble(min, max);
-            if (!getEconomy().has(player, lost))return;
-            getEconomy().remove(player, lost);
-            player.sendMessage(getMessage().get("events.death", getEconomy().currency() + getEconomy().format(lost), event.getDeathMessage().replace(player.getName(), "you")));
+            if (!getEconomyHandler().has(player, lost))return;
+            getEconomyHandler().remove(player, lost);
+            player.sendMessage(getMessage().get("events.death", getEconomyHandler().currency() + getEconomyHandler().format(lost), event.getDeathMessage().replace(player.getName(), "you")));
         }
         if (player.hasPermission("essentials.event.death.keep_exp")) {
             event.setKeepLevel(true);

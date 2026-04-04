@@ -19,11 +19,11 @@ public class EntityCommand implements CommandExecutor, TabCompleter {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
-    private EntityHandler getEntityHandler() {
-        return getInstance().getEntityHandler();
-    }
     private Message getMessage() {
         return getInstance().getMessage();
+    }
+    private EntityHandler getEntityHandler() {
+        return getInstance().getEntityHandler();
     }
     public EntityCommand() {
         getInstance().getCommand("entity").setExecutor(this);

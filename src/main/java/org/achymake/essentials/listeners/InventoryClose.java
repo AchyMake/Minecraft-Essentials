@@ -4,6 +4,7 @@ import org.achymake.essentials.Essentials;
 import org.achymake.essentials.data.Message;
 import org.achymake.essentials.data.Worth;
 import org.achymake.essentials.handlers.EconomyHandler;
+import org.achymake.essentials.handlers.InventoryHandler;
 import org.achymake.essentials.handlers.MaterialHandler;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -19,17 +20,20 @@ public class InventoryClose implements Listener {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
+    private Message getMessage() {
+        return getInstance().getMessage();
+    }
     private Worth getWorth() {
         return getInstance().getWorth();
     }
     private EconomyHandler getEconomyHandler() {
         return getInstance().getEconomyHandler();
     }
+    private InventoryHandler getInventoryHandler() {
+        return getInstance().getInventoryHandler();
+    }
     private MaterialHandler getMaterialHandler() {
         return getInstance().getMaterialHandler();
-    }
-    private Message getMessage() {
-        return getInstance().getMessage();
     }
     private PluginManager getPluginManager() {
         return getInstance().getPluginManager();
@@ -40,12 +44,13 @@ public class InventoryClose implements Listener {
     @EventHandler(priority = EventPriority.NORMAL)
     public void onInventoryClose(InventoryCloseEvent event) {
         var player = (Player) event.getPlayer();
-        var inventories = getInstance().getInventoryHandler().getInventories();
+        var inventories = getInventoryHandler().getInventories();
         if (!inventories.containsKey(player))return;
-        if (event.getInventory() != inventories.get(player))return;
+        var inventory = event.getInventory();
+        if (inventory != inventories.get(player))return;
         var listed = new HashMap<Material, Integer>();
         inventories.remove(player);
-        event.getInventory().forEach(itemStack -> {
+        inventory.forEach(itemStack -> {
             if (itemStack == null)return;
             var material = itemStack.getType();
             if (getWorth().isListed(material) && !itemStack.getItemMeta().hasEnchants()) {

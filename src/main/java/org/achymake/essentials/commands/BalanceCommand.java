@@ -17,11 +17,11 @@ public class BalanceCommand implements CommandExecutor, TabCompleter {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
-    private EconomyHandler getEconomy() {
-        return getInstance().getEconomyHandler();
-    }
     private Message getMessage() {
         return getInstance().getMessage();
+    }
+    private EconomyHandler getEconomyHandler() {
+        return getInstance().getEconomyHandler();
     }
     public BalanceCommand() {
         getInstance().getCommand("balance").setExecutor(this);
@@ -30,15 +30,15 @@ public class BalanceCommand implements CommandExecutor, TabCompleter {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player player) {
             if (args.length == 0) {
-                player.sendMessage(getMessage().get("commands.balance.self", getEconomy().currency() + getEconomy().format(getEconomy().getAccount(player))));
+                player.sendMessage(getMessage().get("commands.balance.self", getEconomyHandler().currency() + getEconomyHandler().format(getEconomyHandler().getAccount(player))));
                 return true;
             } else if (args.length == 1) {
                 if (args[0].equalsIgnoreCase("top")) {
                     if (player.hasPermission("essentials.command.balance.top")) {
                         player.sendMessage(getMessage().get("commands.balance.top.title"));
-                        var list = new ArrayList<>(getEconomy().getTopAccounts());
+                        var list = new ArrayList<>(getEconomyHandler().getTopAccounts());
                         for (int i = 0; i < list.size(); i++) {
-                            player.sendMessage(getMessage().get("commands.balance.top.listed", String.valueOf(i + 1), list.get(i).getKey().getName(), getEconomy().currency() + getEconomy().format(list.get(i).getValue())));
+                            player.sendMessage(getMessage().get("commands.balance.top.listed", String.valueOf(i + 1), list.get(i).getKey().getName(), getEconomyHandler().currency() + getEconomyHandler().format(list.get(i).getValue())));
                         }
                         return true;
                     }
@@ -48,9 +48,9 @@ public class BalanceCommand implements CommandExecutor, TabCompleter {
             if (args.length == 1) {
                 if (args[0].equalsIgnoreCase("top")) {
                     consoleCommandSender.sendMessage(getMessage().get("commands.balance.top.title"));
-                    var list = new ArrayList<>(getEconomy().getTopAccounts());
+                    var list = new ArrayList<>(getEconomyHandler().getTopAccounts());
                     for (int i = 0; i < list.size(); i++) {
-                        consoleCommandSender.sendMessage(getMessage().get("commands.balance.top.listed", String.valueOf(i + 1), list.get(i).getKey().getName(), getEconomy().currency() + getEconomy().format(list.get(i).getValue())));
+                        consoleCommandSender.sendMessage(getMessage().get("commands.balance.top.listed", String.valueOf(i + 1), list.get(i).getKey().getName(), getEconomyHandler().currency() + getEconomyHandler().format(list.get(i).getValue())));
                     }
                     return true;
                 }

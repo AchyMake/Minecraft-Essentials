@@ -18,14 +18,14 @@ public class JailCommand implements CommandExecutor, TabCompleter {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
+    private Message getMessage() {
+        return getInstance().getMessage();
+    }
     private Userdata getUserdata() {
         return getInstance().getUserdata();
     }
     private Jail getJail() {
         return getInstance().getJail();
-    }
-    private Message getMessage() {
-        return getInstance().getMessage();
     }
     public JailCommand() {
         getInstance().getCommand("jail").setExecutor(this);

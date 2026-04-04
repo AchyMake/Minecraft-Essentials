@@ -17,11 +17,11 @@ public class DelWarpCommand implements CommandExecutor, TabCompleter {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
-    private Warps getWarps() {
-        return getInstance().getWarps();
-    }
     private Message getMessage() {
         return getInstance().getMessage();
+    }
+    private Warps getWarps() {
+        return getInstance().getWarps();
     }
     public DelWarpCommand() {
         getInstance().getCommand("delwarp").setExecutor(this);

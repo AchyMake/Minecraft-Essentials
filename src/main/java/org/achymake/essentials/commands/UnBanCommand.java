@@ -17,11 +17,11 @@ public class UnBanCommand implements CommandExecutor, TabCompleter {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
-    private Userdata getUserdata() {
-        return getInstance().getUserdata();
-    }
     private Message getMessage() {
         return getInstance().getMessage();
+    }
+    private Userdata getUserdata() {
+        return getInstance().getUserdata();
     }
     public UnBanCommand() {
         getInstance().getCommand("unban").setExecutor(this);

@@ -32,13 +32,11 @@ public class EntityTargetLivingEntity implements Listener {
         if (target == null)return;
         var entity = event.getEntity();
         if (entity instanceof Player)return;
-        if (!getEntityHandler().isEntityTargetDisabled(event.getEntityType(), target.getType())) {
-            if (target instanceof Player player) {
-                if (!getUserdata().isVanished(player))return;
-                event.setCancelled(true);
-                event.setTarget(null);
-            }
-        } else {
+        if (getEntityHandler().isEntityTargetDisabled(event.getEntityType(), target.getType())) {
+            event.setCancelled(true);
+            event.setTarget(null);
+        } else if (target instanceof Player player) {
+            if (!getUserdata().isVanished(player))return;
             event.setCancelled(true);
             event.setTarget(null);
         }

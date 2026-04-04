@@ -18,7 +18,7 @@ public class TablistHandler {
     private Userdata getUserdata() {
         return getInstance().getUserdata();
     }
-    private ScheduleHandler getScheduler() {
+    private ScheduleHandler getScheduleHandler() {
         return getInstance().getScheduleHandler();
     }
     private final File file = new File(getInstance().getDataFolder(), "tablist.yml");
@@ -139,9 +139,9 @@ public class TablistHandler {
         if (hasTab(player))return;
         var world = player.getWorld().getName();
         if (hasName(world) && hasHeaderLines(world) && hasFooterLines(world)) {
-            getUserdata().addTaskID(player, "tab", getScheduler().runTimer(new Tab(player), 0, getTick(world)).getTaskId());
+            getUserdata().addTaskID(player, "tab", getScheduleHandler().runTimer(new Tab(player), 0, getTick(world)).getTaskId());
         } else if (hasName() && hasHeaderLines() && hasFooterLines()) {
-            getUserdata().addTaskID(player, "tab", getScheduler().runTimer(new Tab(player), 0, getTick()).getTaskId());
+            getUserdata().addTaskID(player, "tab", getScheduleHandler().runTimer(new Tab(player), 0, getTick()).getTaskId());
         }
     }
     /**

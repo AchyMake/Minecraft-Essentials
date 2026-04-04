@@ -19,17 +19,17 @@ public class SetWorthCommand implements CommandExecutor, TabCompleter {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
+    private Message getMessage() {
+        return getInstance().getMessage();
+    }
     private Worth getWorth() {
         return getInstance().getWorth();
     }
-    private EconomyHandler getEconomy() {
+    private EconomyHandler getEconomyHandler() {
         return getInstance().getEconomyHandler();
     }
     private MaterialHandler getMaterialHandler() {
         return getInstance().getMaterialHandler();
-    }
-    private Message getMessage() {
-        return getInstance().getMessage();
     }
     public SetWorthCommand() {
         getInstance().getCommand("setworth").setExecutor(this);
@@ -51,7 +51,7 @@ public class SetWorthCommand implements CommandExecutor, TabCompleter {
                         var worth = Double.parseDouble(args[1]);
                         if (getWorth().setWorth(material, worth)) {
                             if (getWorth().isListed(material)) {
-                                player.sendMessage(getMessage().get("commands.setworth.enable", getMessage().toTitleCase(materialName), getEconomy().currency() + getEconomy().format(getWorth().get(material))));
+                                player.sendMessage(getMessage().get("commands.setworth.enable", getMessage().toTitleCase(materialName), getEconomyHandler().currency() + getEconomyHandler().format(getWorth().get(material))));
                             } else player.sendMessage(getMessage().get("commands.setworth.disable", getMessage().toTitleCase(materialName)));
                         } else player.sendMessage(getMessage().get("error.file.exception", getWorth().getFile().getName()));
                         return true;

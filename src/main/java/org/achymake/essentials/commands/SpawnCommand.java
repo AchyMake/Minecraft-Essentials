@@ -19,17 +19,17 @@ public class SpawnCommand implements CommandExecutor, TabCompleter {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
-    private Userdata getUserdata() {
-        return getInstance().getUserdata();
+    private Message getMessage() {
+        return getInstance().getMessage();
     }
     private Spawn getSpawn() {
         return getInstance().getSpawn();
     }
+    private Userdata getUserdata() {
+        return getInstance().getUserdata();
+    }
     private WorldHandler getWorldHandler() {
         return getInstance().getWorldHandler();
-    }
-    private Message getMessage() {
-        return getInstance().getMessage();
     }
     public SpawnCommand() {
         getInstance().getCommand("spawn").setExecutor(this);

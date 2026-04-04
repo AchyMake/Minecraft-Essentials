@@ -17,13 +17,13 @@ public class TPCancelCommand implements CommandExecutor, TabCompleter {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
-    private Userdata getUserdata() {
-        return getInstance().getUserdata();
-    }
     private Message getMessage() {
         return getInstance().getMessage();
     }
-    private ScheduleHandler getScheduler() {
+    private Userdata getUserdata() {
+        return getInstance().getUserdata();
+    }
+    private ScheduleHandler getScheduleHandler() {
         return getInstance().getScheduleHandler();
     }
     public TPCancelCommand() {
@@ -37,7 +37,7 @@ public class TPCancelCommand implements CommandExecutor, TabCompleter {
                     var target = getUserdata().getTpaSent(player);
                     if (target != null) {
                         var tpaTask = getUserdata().getTaskID(player, "tpa");
-                        if (getScheduler().isQueued(tpaTask)) {
+                        if (getScheduleHandler().isQueued(tpaTask)) {
                             getUserdata().setTpaFrom(target, null);
                             getUserdata().removeTask(target, "tpa");
                             getUserdata().setTpaSent(player, null);
@@ -50,7 +50,7 @@ public class TPCancelCommand implements CommandExecutor, TabCompleter {
                     var target = getUserdata().getTpaHereSent(player);
                     if (target != null) {
                         var tpaHereTask = getUserdata().getTaskID(player, "tpahere");
-                        if (getScheduler().isQueued(tpaHereTask)) {
+                        if (getScheduleHandler().isQueued(tpaHereTask)) {
                             getUserdata().setTpaHereFrom(target, null);
                             getUserdata().removeTask(target, "tpahere");
                             getUserdata().setTpaHereSent(player, null);

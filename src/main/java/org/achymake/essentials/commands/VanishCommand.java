@@ -18,14 +18,14 @@ public class VanishCommand implements CommandExecutor, TabCompleter {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
+    private Message getMessage() {
+        return getInstance().getMessage();
+    }
     private Userdata getUserdata() {
         return getInstance().getUserdata();
     }
-    private VanishHandler getVanish() {
+    private VanishHandler getVanishHandler() {
         return getInstance().getVanishHandler();
-    }
-    private Message getMessage() {
-        return getInstance().getMessage();
     }
     public VanishCommand() {
         getInstance().getCommand("vanish").setExecutor(this);
@@ -34,7 +34,7 @@ public class VanishCommand implements CommandExecutor, TabCompleter {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player player) {
             if (args.length == 0) {
-                if (!getVanish().toggleVanish(player)) {
+                if (!getVanishHandler().toggleVanish(player)) {
                     player.sendMessage(getMessage().get("error.file.exception", getUserdata().getFile(player).getName()));
                 }
                 return true;
@@ -43,14 +43,14 @@ public class VanishCommand implements CommandExecutor, TabCompleter {
                     var target = getInstance().getPlayer(args[0]);
                     if (target != null) {
                         if (target == player) {
-                            if (getVanish().toggleVanish(target)) {
-                                if (getVanish().isVanish(target)) {
+                            if (getVanishHandler().toggleVanish(target)) {
+                                if (getVanishHandler().isVanish(target)) {
                                     player.sendMessage(getMessage().get("commands.vanish.sender", target.getName(), getMessage().get("enable")));
                                 } else player.sendMessage(getMessage().get("commands.vanish.sender", target.getName(), getMessage().get("disable")));
                             } else player.sendMessage(getMessage().get("error.file.exception", getUserdata().getFile(target).getName()));
                         } else if (!target.hasPermission("essentials.command.vanish.exempt")) {
-                            if (getVanish().toggleVanish(target)) {
-                                if (getVanish().isVanish(target)) {
+                            if (getVanishHandler().toggleVanish(target)) {
+                                if (getVanishHandler().isVanish(target)) {
                                     player.sendMessage(getMessage().get("commands.vanish.sender", target.getName(), getMessage().get("enable")));
                                 } else player.sendMessage(getMessage().get("commands.vanish.sender", target.getName(), getMessage().get("disable")));
                             } else player.sendMessage(getMessage().get("error.file.exception", getUserdata().getFile(target).getName()));
@@ -58,8 +58,8 @@ public class VanishCommand implements CommandExecutor, TabCompleter {
                     } else {
                         var offlinePlayer = getInstance().getOfflinePlayer(args[0]);
                         if (getUserdata().exists(offlinePlayer)) {
-                            if (getVanish().toggleVanish(offlinePlayer)) {
-                                if (getVanish().isVanish(offlinePlayer)) {
+                            if (getVanishHandler().toggleVanish(offlinePlayer)) {
+                                if (getVanishHandler().isVanish(offlinePlayer)) {
                                     player.sendMessage(getMessage().get("commands.vanish.sender", offlinePlayer.getName(), getMessage().get("enable")));
                                 } else player.sendMessage(getMessage().get("commands.vanish.sender", offlinePlayer.getName(), getMessage().get("disable")));
                             } else player.sendMessage(getMessage().get("error.file.exception", getUserdata().getFile(offlinePlayer).getName()));
@@ -74,18 +74,18 @@ public class VanishCommand implements CommandExecutor, TabCompleter {
                     if (value) {
                         if (target != null) {
                             if (target == player) {
-                                if (getVanish().setVanish(target, true)) {
+                                if (getVanishHandler().setVanish(target, true)) {
                                     player.sendMessage(getMessage().get("commands.vanish.sender", target.getName(), getMessage().get("enable")));
                                 } else player.sendMessage(getMessage().get("error.file.exception", getUserdata().getFile(target).getName()));
                             } else if (!target.hasPermission("essentials.command.vanish.exempt")) {
-                                if (getVanish().setVanish(target, true)) {
+                                if (getVanishHandler().setVanish(target, true)) {
                                     player.sendMessage(getMessage().get("commands.vanish.sender", target.getName(), getMessage().get("enable")));
                                 } else player.sendMessage(getMessage().get("error.file.exception", getUserdata().getFile(target).getName()));
                             } else player.sendMessage(getMessage().get("commands.vanish.exempt", target.getName()));
                         } else {
                             var offlinePlayer = getInstance().getOfflinePlayer(args[0]);
                             if (getUserdata().exists(offlinePlayer)) {
-                                if (getVanish().setVanish(offlinePlayer, true)) {
+                                if (getVanishHandler().setVanish(offlinePlayer, true)) {
                                     player.sendMessage(getMessage().get("commands.vanish.sender", offlinePlayer.getName(), getMessage().get("enable")));
                                 } else player.sendMessage(getMessage().get("error.file.exception", getUserdata().getFile(offlinePlayer).getName()));
                             } else player.sendMessage(getMessage().get("error.target.invalid", offlinePlayer.getName()));
@@ -93,18 +93,18 @@ public class VanishCommand implements CommandExecutor, TabCompleter {
                     } else {
                         if (target != null) {
                             if (target == player) {
-                                if (getVanish().setVanish(target, false)) {
+                                if (getVanishHandler().setVanish(target, false)) {
                                     player.sendMessage(getMessage().get("commands.vanish.sender", target.getName(), getMessage().get("disable")));
                                 } else player.sendMessage(getMessage().get("error.file.exception", getUserdata().getFile(target).getName()));
                             } else if (!target.hasPermission("essentials.command.vanish.exempt")) {
-                                if (getVanish().setVanish(target, false)) {
+                                if (getVanishHandler().setVanish(target, false)) {
                                     player.sendMessage(getMessage().get("commands.vanish.disable", target.getName()));
                                 } else player.sendMessage(getMessage().get("error.file.exception", getUserdata().getFile(target).getName()));
                             } else player.sendMessage(getMessage().get("commands.vanish.exempt", target.getName()));
                         } else {
                             var offlinePlayer = getInstance().getOfflinePlayer(args[0]);
                             if (getUserdata().exists(offlinePlayer)) {
-                                if (getVanish().setVanish(offlinePlayer, false)) {
+                                if (getVanishHandler().setVanish(offlinePlayer, false)) {
                                     player.sendMessage(getMessage().get("commands.vanish.sender", offlinePlayer.getName(), getMessage().get("disable")));
                                 } else player.sendMessage(getMessage().get("error.file.exception", getUserdata().getFile(offlinePlayer).getName()));
                             } else player.sendMessage(getMessage().get("error.target.invalid", offlinePlayer.getName()));
@@ -117,16 +117,16 @@ public class VanishCommand implements CommandExecutor, TabCompleter {
             if (args.length == 1) {
                 var target = getInstance().getPlayer(args[0]);
                 if (target != null) {
-                    if (getVanish().toggleVanish(target)) {
-                        if (getVanish().isVanish(target)) {
+                    if (getVanishHandler().toggleVanish(target)) {
+                        if (getVanishHandler().isVanish(target)) {
                             consoleCommandSender.sendMessage(getMessage().get("commands.vanish.sender", target.getName(), getMessage().get("enable")));
                         } else consoleCommandSender.sendMessage(getMessage().get("commands.vanish.sender", target.getName(), getMessage().get("disable")));
                     } else consoleCommandSender.sendMessage(getMessage().get("error.file.exception", getUserdata().getFile(target).getName()));
                 } else {
                     var offlinePlayer = getInstance().getOfflinePlayer(args[0]);
                     if (getUserdata().exists(offlinePlayer)) {
-                        if (getVanish().toggleVanish(offlinePlayer)) {
-                            if (getVanish().isVanish(offlinePlayer)) {
+                        if (getVanishHandler().toggleVanish(offlinePlayer)) {
+                            if (getVanishHandler().isVanish(offlinePlayer)) {
                                 consoleCommandSender.sendMessage(getMessage().get("commands.vanish.sender", offlinePlayer.getName(), getMessage().get("enable")));
                             } else consoleCommandSender.sendMessage(getMessage().get("commands.vanish.sender", offlinePlayer.getName(), getMessage().get("disable")));
                         } else consoleCommandSender.sendMessage(getMessage().get("error.file.exception", getUserdata().getFile(offlinePlayer).getName()));
@@ -138,26 +138,26 @@ public class VanishCommand implements CommandExecutor, TabCompleter {
                 var value = Boolean.parseBoolean(args[1]);
                 if (value) {
                     if (target != null) {
-                        if (getVanish().setVanish(target, true)) {
+                        if (getVanishHandler().setVanish(target, true)) {
                             consoleCommandSender.sendMessage(getMessage().get("commands.vanish.sender", target.getName(), getMessage().get("enable")));
                         } else consoleCommandSender.sendMessage(getMessage().get("error.file.exception", getUserdata().getFile(target).getName()));
                     } else {
                         var offlinePlayer = getInstance().getOfflinePlayer(args[0]);
                         if (getUserdata().exists(offlinePlayer)) {
-                            if (getVanish().setVanish(offlinePlayer, true)) {
+                            if (getVanishHandler().setVanish(offlinePlayer, true)) {
                                 consoleCommandSender.sendMessage(getMessage().get("commands.vanish.sender", offlinePlayer.getName(), getMessage().get("enable")));
                             } else consoleCommandSender.sendMessage(getMessage().get("error.file.exception", getUserdata().getFile(offlinePlayer).getName()));
                         } else consoleCommandSender.sendMessage(getMessage().get("error.target.invalid", offlinePlayer.getName()));
                     }
                 } else {
                     if (target != null) {
-                        if (getVanish().setVanish(target, false)) {
+                        if (getVanishHandler().setVanish(target, false)) {
                             consoleCommandSender.sendMessage(getMessage().get("commands.vanish.sender", target.getName(), getMessage().get("disable")));
                         } else consoleCommandSender.sendMessage(getMessage().get("error.file.exception", getUserdata().getFile(target).getName()));
                     } else {
                         var offlinePlayer = getInstance().getOfflinePlayer(args[0]);
                         if (getUserdata().exists(offlinePlayer)) {
-                            if (getVanish().setVanish(offlinePlayer, false)) {
+                            if (getVanishHandler().setVanish(offlinePlayer, false)) {
                                 consoleCommandSender.sendMessage(getMessage().get("commands.vanish.sender", offlinePlayer.getName(), getMessage().get("disable")));
                             } else consoleCommandSender.sendMessage(getMessage().get("error.file.exception", getUserdata().getFile(offlinePlayer).getName()));
                         } else consoleCommandSender.sendMessage(getMessage().get("error.target.invalid", offlinePlayer.getName()));

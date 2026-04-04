@@ -11,7 +11,7 @@ public class ProjectileHandler {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
-    private ScheduleHandler getScheduler() {
+    private ScheduleHandler getScheduleHandler() {
         return getInstance().getScheduleHandler();
     }
     /**
@@ -21,7 +21,7 @@ public class ProjectileHandler {
      * @since many moons ago
      */
     public void addRemovalTask(Projectile projectile, int seconds) {
-        int taskID = getScheduler().runLater(() -> {
+        int taskID = getScheduleHandler().runLater(() -> {
             if (projectile != null) {
                 remove(projectile);
             }
@@ -36,8 +36,8 @@ public class ProjectileHandler {
     public void remove(Projectile projectile) {
         if (projectiles.containsKey(projectile)) {
             var taskID = projectiles.get(projectile);
-            if (getScheduler().isQueued(taskID)) {
-                getScheduler().cancel(taskID);
+            if (getScheduleHandler().isQueued(taskID)) {
+                getScheduleHandler().cancel(taskID);
             }
             projectiles.remove(projectile);
             projectile.remove();
@@ -51,8 +51,8 @@ public class ProjectileHandler {
     public void cancel(Projectile projectile) {
         if (projectiles.containsKey(projectile)) {
             var taskID = projectiles.get(projectile);
-            if (getScheduler().isQueued(taskID)) {
-                getScheduler().cancel(taskID);
+            if (getScheduleHandler().isQueued(taskID)) {
+                getScheduleHandler().cancel(taskID);
             }
             projectiles.remove(projectile);
         }
@@ -64,8 +64,8 @@ public class ProjectileHandler {
     public void disable() {
         if (projectiles.isEmpty())return;
         projectiles.forEach((projectile, taskID) -> {
-            if (getScheduler().isQueued(taskID)) {
-                getScheduler().cancel(taskID);
+            if (getScheduleHandler().isQueued(taskID)) {
+                getScheduleHandler().cancel(taskID);
             }
             if (projectile != null) {
                 projectiles.remove(projectile);

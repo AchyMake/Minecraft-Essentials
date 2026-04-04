@@ -13,11 +13,11 @@ public class PlayerSpawnLocation implements Listener {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
-    private Userdata getUserdata() {
-        return getInstance().getUserdata();
-    }
     private Spawn getSpawn() {
         return getInstance().getSpawn();
+    }
+    private Userdata getUserdata() {
+        return getInstance().getUserdata();
     }
     private PluginManager getPluginManager() {
         return getInstance().getPluginManager();
@@ -34,7 +34,7 @@ public class PlayerSpawnLocation implements Listener {
             getUserdata().setLocation(player, quit, "join");
         } else if (getSpawn().getLocation() != null) {
             event.setSpawnLocation(getSpawn().getLocation());
-            getUserdata().setLocation(player, event.getSpawnLocation(), "join");
+            getUserdata().setLocation(player, getSpawn().getLocation(), "join");
         } else getUserdata().setLocation(player, event.getSpawnLocation(), "join");
     }
 }

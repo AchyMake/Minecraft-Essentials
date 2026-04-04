@@ -15,14 +15,14 @@ public class VanishHandler {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
+    private Message getMessage() {
+        return getInstance().getMessage();
+    }
     private Userdata getUserdata() {
         return getInstance().getUserdata();
     }
-    private ScheduleHandler getScheduler() {
+    private ScheduleHandler getScheduleHandler() {
         return getInstance().getScheduleHandler();
-    }
-    private Message getMessage() {
-        return getInstance().getMessage();
     }
     /**
      * is vanished
@@ -94,7 +94,7 @@ public class VanishHandler {
                     vanished.showPlayer(getInstance(), player);
                 });
                 getMessage().sendActionBar(player, getMessage().get("events.vanish", getMessage().get("enable")));
-                var taskID = getScheduler().runTimer(new Vanish(player), 0, 50).getTaskId();
+                var taskID = getScheduleHandler().runTimer(new Vanish(player), 0, 50).getTaskId();
                 getUserdata().addTaskID(player, "vanish", taskID);
                 return true;
             } else return false;

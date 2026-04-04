@@ -19,13 +19,13 @@ public class PlayerJoin implements Listener {
     private FileConfiguration getConfig() {
         return getInstance().getConfig();
     }
+    private Message getMessage() {
+        return getInstance().getMessage();
+    }
     private Userdata getUserdata() {
         return getInstance().getUserdata();
     }
-    private UpdateChecker getUpdateChecker() {
-        return getInstance().getUpdateChecker();
-    }
-    private ScheduleHandler getScheduler() {
+    private ScheduleHandler getScheduleHandler() {
         return getInstance().getScheduleHandler();
     }
     private ScoreboardHandler getScoreboardHandler() {
@@ -40,8 +40,8 @@ public class PlayerJoin implements Listener {
     private WorldHandler getWorldHandler() {
         return getInstance().getWorldHandler();
     }
-    private Message getMessage() {
-        return getInstance().getMessage();
+    private UpdateChecker getUpdateChecker() {
+        return getInstance().getUpdateChecker();
     }
     private PluginManager getPluginManager() {
         return getInstance().getPluginManager();
@@ -68,7 +68,7 @@ public class PlayerJoin implements Listener {
                 event.setJoinMessage(null);
                 getMessage().sendAll(getMessage().get("events.join.notify", player.getName()), "essentials.event.join.notify");
             }
-            getScheduler().runLater(() -> {
+            getScheduleHandler().runLater(() -> {
                 if (getUserdata().hasJoined(player)) {
                     getMessage().sendStringList(player, getConfig().getStringList("message-of-the-day.welcome-back"));
                 } else getMessage().sendStringList(player, getConfig().getStringList("message-of-the-day.welcome"));

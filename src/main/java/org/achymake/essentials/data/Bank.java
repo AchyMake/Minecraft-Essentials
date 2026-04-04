@@ -18,7 +18,7 @@ public class Bank {
     private Userdata getUserdata() {
         return getInstance().getUserdata();
     }
-    private EconomyHandler getEconomy() {
+    private EconomyHandler getEconomyHandler() {
         return getInstance().getEconomyHandler();
     }
     /**
@@ -77,7 +77,7 @@ public class Bank {
             var file = getFile(bankName);
             var config = YamlConfiguration.loadConfiguration(file);
             config.set("owner", offlinePlayer.getUniqueId().toString());
-            config.set("account", getEconomy().getStartingBank());
+            config.set("account", getEconomyHandler().getStartingBank());
             config.set("members", new ArrayList<String>());
             try {
                 config.save(file);

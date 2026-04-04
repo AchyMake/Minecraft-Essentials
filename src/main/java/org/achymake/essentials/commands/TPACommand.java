@@ -17,14 +17,14 @@ public class TPACommand implements CommandExecutor, TabCompleter {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
+    private Message getMessage() {
+        return getInstance().getMessage();
+    }
     private Userdata getUserdata() {
         return getInstance().getUserdata();
     }
-    private ScheduleHandler getScheduler() {
+    private ScheduleHandler getScheduleHandler() {
         return getInstance().getScheduleHandler();
-    }
-    private Message getMessage() {
-        return getInstance().getMessage();
     }
     public TPACommand() {
         getInstance().getCommand("tpa").setExecutor(this);
@@ -37,7 +37,7 @@ public class TPACommand implements CommandExecutor, TabCompleter {
                 if (target != null) {
                     if (target != player) {
                         if (!getUserdata().hasTaskID(player, "tpa")) {
-                            var taskID = getScheduler().runLater(() -> {
+                            var taskID = getScheduleHandler().runLater(() -> {
                                 getUserdata().setTpaFrom(target, null);
                                 getUserdata().removeTask(target, "tpa");
                                 getUserdata().setTpaSent(player, null);

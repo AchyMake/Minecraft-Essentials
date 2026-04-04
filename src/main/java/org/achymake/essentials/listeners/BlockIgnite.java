@@ -21,7 +21,7 @@ public class BlockIgnite implements Listener {
     private Userdata getUserdata() {
         return getInstance().getUserdata();
     }
-    private MaterialHandler getMaterials() {
+    private MaterialHandler getMaterialHandler() {
         return getInstance().getMaterialHandler();
     }
     private PluginManager getPluginManager() {
@@ -32,38 +32,40 @@ public class BlockIgnite implements Listener {
     }
     @EventHandler(priority = EventPriority.NORMAL)
     public void onBlockIgnite(BlockIgniteEvent event) {
-        if (event.getIgnitingEntity() instanceof Arrow) {
-            if (!event.getCause().equals(BlockIgniteEvent.IgniteCause.ARROW))return;
+        var cause = event.getCause();
+        var ignitingEntity = event.getIgnitingEntity();
+        var block = event.getIgnitingBlock();
+        if (ignitingEntity instanceof Arrow) {
+            if (!cause.equals(BlockIgniteEvent.IgniteCause.ARROW))return;
             if (!getConfig().getBoolean("fire.disable-fire-spread"))return;
             event.setCancelled(true);
-        } else if (event.getIgnitingEntity() instanceof EnderCrystal) {
-            if (!event.getCause().equals(BlockIgniteEvent.IgniteCause.ENDER_CRYSTAL))return;
+        } else if (ignitingEntity instanceof EnderCrystal) {
+            if (!cause.equals(BlockIgniteEvent.IgniteCause.ENDER_CRYSTAL))return;
             if (!getConfig().getBoolean("fire.disable-fire-spread"))return;
             event.setCancelled(true);
-        } else if (event.getIgnitingEntity() instanceof Explosive) {
-            if (!event.getCause().equals(BlockIgniteEvent.IgniteCause.EXPLOSION))return;
+        } else if (ignitingEntity instanceof Explosive) {
+            if (!cause.equals(BlockIgniteEvent.IgniteCause.EXPLOSION))return;
             if (!getConfig().getBoolean("fire.disable-fire-spread"))return;
             event.setCancelled(true);
-        } else if (event.getIgnitingEntity() instanceof Fireball) {
-            if (!event.getCause().equals(BlockIgniteEvent.IgniteCause.FIREBALL))return;
+        } else if (ignitingEntity instanceof Fireball) {
+            if (!cause.equals(BlockIgniteEvent.IgniteCause.FIREBALL))return;
             if (!getConfig().getBoolean("fire.disable-fire-spread"))return;
             event.setCancelled(true);
-        } else if (event.getIgnitingEntity() instanceof LightningStrike) {
-            if (!event.getCause().equals(BlockIgniteEvent.IgniteCause.LIGHTNING))return;
+        } else if (ignitingEntity instanceof LightningStrike) {
+            if (!cause.equals(BlockIgniteEvent.IgniteCause.LIGHTNING))return;
             if (!getConfig().getBoolean("fire.disable-fire-spread"))return;
             event.setCancelled(true);
-        } else if (event.getIgnitingEntity() instanceof Player player) {
+        } else if (ignitingEntity instanceof Player player) {
             if (!getUserdata().isDisabled(player))return;
             event.setCancelled(true);
-        } else if (event.getIgnitingBlock() != null) {
-            var block = event.getIgnitingBlock();
+        } else if (block != null) {
             var material = block.getType();
-            if (material.equals(getMaterials().get("lava"))) {
-                if (!event.getCause().equals(BlockIgniteEvent.IgniteCause.LAVA))return;
+            if (material.equals(getMaterialHandler().get("lava"))) {
+                if (!cause.equals(BlockIgniteEvent.IgniteCause.LAVA))return;
                 if (!getConfig().getBoolean("fire.disable-lava-fire-spread"))return;
                 event.setCancelled(true);
-            } else if (material.equals(getMaterials().get("fire"))) {
-                if (!event.getCause().equals(BlockIgniteEvent.IgniteCause.SPREAD))return;
+            } else if (material.equals(getMaterialHandler().get("fire"))) {
+                if (!cause.equals(BlockIgniteEvent.IgniteCause.SPREAD))return;
                 if (!getConfig().getBoolean("fire.disable-fire-spread"))return;
                 event.setCancelled(true);
             }

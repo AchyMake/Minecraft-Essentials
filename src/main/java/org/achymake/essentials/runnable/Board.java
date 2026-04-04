@@ -5,8 +5,6 @@ import org.achymake.essentials.data.Message;
 import org.achymake.essentials.handlers.ScoreboardHandler;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,17 +13,11 @@ public record Board(Player getPlayer) implements Runnable {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
-    private ScoreboardHandler getScoreboardHandler() {
-        return getInstance().getScoreboardHandler();
-    }
-    private ScoreboardManager getScoreboardManager() {
-        return getInstance().getServer().getScoreboardManager();
-    }
-    private Scoreboard getNewScoreboard() {
-        return getScoreboardManager().getNewScoreboard();
-    }
     private Message getMessage() {
         return getInstance().getMessage();
+    }
+    private ScoreboardHandler getScoreboardHandler() {
+        return getInstance().getScoreboardHandler();
     }
     private String getTitle() {
         var world = getPlayer().getWorld();
@@ -52,7 +44,7 @@ public record Board(Player getPlayer) implements Runnable {
     @Override
     public void run() {
         if (getTitle() != null) {
-            var scoreboard = getNewScoreboard();
+            var scoreboard = getScoreboardHandler().getNewScoreboard();
             var objective = scoreboard.registerNewObjective(getPlayer().getUniqueId() + "_board", "yummy", getTitle());
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
             if (!getInstance().isBukkit()) {

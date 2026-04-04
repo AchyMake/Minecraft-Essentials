@@ -16,11 +16,11 @@ public class EnchantCommand implements CommandExecutor, TabCompleter {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
-    private MaterialHandler getMaterialHandler() {
-        return getInstance().getMaterialHandler();
-    }
     private Message getMessage() {
         return getInstance().getMessage();
+    }
+    private MaterialHandler getMaterialHandler() {
+        return getInstance().getMaterialHandler();
     }
     public EnchantCommand() {
         getInstance().getCommand("enchant").setExecutor(this);

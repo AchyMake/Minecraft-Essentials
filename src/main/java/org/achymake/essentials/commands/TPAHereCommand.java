@@ -17,14 +17,14 @@ public class TPAHereCommand implements CommandExecutor, TabCompleter {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
+    private Message getMessage() {
+        return getInstance().getMessage();
+    }
     private Userdata getUserdata() {
         return getInstance().getUserdata();
     }
-    private ScheduleHandler getScheduler() {
+    private ScheduleHandler getScheduleHandler() {
         return getInstance().getScheduleHandler();
-    }
-    private Message getMessage() {
-        return getInstance().getMessage();
     }
     public TPAHereCommand() {
         getInstance().getCommand("tpahere").setExecutor(this);
@@ -37,7 +37,7 @@ public class TPAHereCommand implements CommandExecutor, TabCompleter {
                 if (target != null) {
                     if (target != player) {
                         if (!getUserdata().hasTaskID(player, "tpahere")) {
-                            int taskID = getScheduler().runLater(() -> {
+                            int taskID = getScheduleHandler().runLater(() -> {
                                 getUserdata().setTpaHereFrom(target, null);
                                 getUserdata().removeTask(target, "tpahere");
                                 getUserdata().setTpaHereSent(player, null);

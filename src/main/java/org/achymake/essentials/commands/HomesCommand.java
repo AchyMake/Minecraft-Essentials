@@ -16,11 +16,11 @@ public class HomesCommand implements CommandExecutor, TabCompleter {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
-    private Userdata getUserdata() {
-        return getInstance().getUserdata();
-    }
     private Message getMessage() {
         return getInstance().getMessage();
+    }
+    private Userdata getUserdata() {
+        return getInstance().getUserdata();
     }
     public HomesCommand() {
         getInstance().getCommand("homes").setExecutor(this);

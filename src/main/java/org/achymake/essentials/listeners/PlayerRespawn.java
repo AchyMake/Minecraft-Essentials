@@ -18,14 +18,14 @@ public class PlayerRespawn implements Listener {
     private FileConfiguration getConfig() {
         return getInstance().getConfig();
     }
+    private Message getMessage() {
+        return getInstance().getMessage();
+    }
     private Spawn getSpawn() {
         return getInstance().getSpawn();
     }
     private Userdata getUserdata() {
         return getInstance().getUserdata();
-    }
-    private Message getMessage() {
-        return getInstance().getMessage();
     }
     private PluginManager getPluginManager() {
         return getInstance().getPluginManager();

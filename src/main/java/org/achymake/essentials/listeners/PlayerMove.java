@@ -18,11 +18,11 @@ public class PlayerMove implements Listener {
     private FileConfiguration getConfig() {
         return getInstance().getConfig();
     }
-    private Userdata getUserdata() {
-        return getInstance().getUserdata();
-    }
     private Message getMessage() {
         return getInstance().getMessage();
+    }
+    private Userdata getUserdata() {
+        return getInstance().getUserdata();
     }
     private PluginManager getPluginManager() {
         return getInstance().getPluginManager();
@@ -32,8 +32,9 @@ public class PlayerMove implements Listener {
     }
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerMove(PlayerMoveEvent event) {
-        if (event.getTo() != null) {
-            if (!hasMoved(event.getFrom(), event.getTo()))return;
+        var to = event.getTo();
+        if (to != null) {
+            if (!hasMoved(event.getFrom(), to))return;
             var player = event.getPlayer();
             if (getUserdata().isFrozen(player)) {
                 event.setCancelled(true);

@@ -23,19 +23,21 @@ public class CreatureSpawn implements Listener {
     }
     @EventHandler(priority = EventPriority.MONITOR)
     public void onCreatureSpawn(CreatureSpawnEvent event) {
-        if (!getEntityHandler().isSpawnReasonDisabled(event.getEntityType(), event.getSpawnReason())) {
-            if (!getEntityHandler().isCreatureSpawnDisabled(event.getEntityType())) {
+        var spawnReason = event.getSpawnReason();
+        var entityType = event.getEntityType();
+        if (!getEntityHandler().isSpawnReasonDisabled(entityType, spawnReason)) {
+            if (!getEntityHandler().isCreatureSpawnDisabled(entityType)) {
                 var entity = event.getEntity();
                 if (!getEntityHandler().isOverChunkLimit(entity)) {
-                    if (event.getSpawnReason().equals(CreatureSpawnEvent.SpawnReason.CUSTOM))return;
-                    if (event.getSpawnReason().equals(CreatureSpawnEvent.SpawnReason.BREEDING))return;
-                    if (event.getSpawnReason().equals(CreatureSpawnEvent.SpawnReason.SPAWNER_EGG))return;
-                    if (event.getSpawnReason().equals(CreatureSpawnEvent.SpawnReason.CURED))return;
-                    if (event.getSpawnReason().equals(CreatureSpawnEvent.SpawnReason.INFECTION))return;
-                    if (event.getSpawnReason().equals(CreatureSpawnEvent.SpawnReason.DROWNED))return;
-                    if (event.getSpawnReason().equals(CreatureSpawnEvent.SpawnReason.FROZEN))return;
-                    if (event.getSpawnReason().equals(CreatureSpawnEvent.SpawnReason.SHEARED))return;
-                    if (event.getSpawnReason().equals(CreatureSpawnEvent.SpawnReason.PIGLIN_ZOMBIFIED))return;
+                    if (spawnReason.equals(CreatureSpawnEvent.SpawnReason.CUSTOM))return;
+                    if (spawnReason.equals(CreatureSpawnEvent.SpawnReason.BREEDING))return;
+                    if (spawnReason.equals(CreatureSpawnEvent.SpawnReason.SPAWNER_EGG))return;
+                    if (spawnReason.equals(CreatureSpawnEvent.SpawnReason.CURED))return;
+                    if (spawnReason.equals(CreatureSpawnEvent.SpawnReason.INFECTION))return;
+                    if (spawnReason.equals(CreatureSpawnEvent.SpawnReason.DROWNED))return;
+                    if (spawnReason.equals(CreatureSpawnEvent.SpawnReason.FROZEN))return;
+                    if (spawnReason.equals(CreatureSpawnEvent.SpawnReason.SHEARED))return;
+                    if (spawnReason.equals(CreatureSpawnEvent.SpawnReason.PIGLIN_ZOMBIFIED))return;
                     getEntityHandler().setEquipment(entity);
                 } else event.setCancelled(true);
             } else event.setCancelled(true);

@@ -18,14 +18,14 @@ public class GMSCommand implements CommandExecutor, TabCompleter {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
+    private Message getMessage() {
+        return getInstance().getMessage();
+    }
     private Userdata getUserdata() {
         return getInstance().getUserdata();
     }
     private GameModeHandler getGameModeHandler() {
         return getInstance().getGameModeHandler();
-    }
-    private Message getMessage() {
-        return getInstance().getMessage();
     }
     public GMSCommand() {
         getInstance().getCommand("gms").setExecutor(this);

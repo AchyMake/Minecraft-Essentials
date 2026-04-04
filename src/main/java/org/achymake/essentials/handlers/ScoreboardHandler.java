@@ -7,6 +7,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.ScoreboardManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,11 +22,20 @@ public class ScoreboardHandler {
     private Userdata getUserdata() {
         return getInstance().getUserdata();
     }
-    private ScheduleHandler getScheduler() {
+    private ScheduleHandler getScheduleHandler() {
         return getInstance().getScheduleHandler();
     }
     private final File file = new File(getInstance().getDataFolder(), "scoreboard.yml");
     private FileConfiguration config = YamlConfiguration.loadConfiguration(file);
+    public ScoreboardManager getScoreboardManager() {
+        return getInstance().getScoreboardManager();
+    }
+    public Scoreboard getMainScoreboard() {
+        return getScoreboardManager().getMainScoreboard();
+    }
+    public Scoreboard getNewScoreboard() {
+        return getScoreboardManager().getNewScoreboard();
+    }
     public File getFile() {
         return file;
     }
@@ -74,9 +85,9 @@ public class ScoreboardHandler {
         if (hasBoard(player))return;
         var world = player.getWorld().getName();
         if (hasTitle(world) && isLine(world)) {
-            getUserdata().addTaskID(player, "board", getScheduler().runTimer(new Board(player), 0, getTick(world)).getTaskId());
+            getUserdata().addTaskID(player, "board", getScheduleHandler().runTimer(new Board(player), 0, getTick(world)).getTaskId());
         } else if (hasTitle() && isLine()) {
-            getUserdata().addTaskID(player, "board", getScheduler().runTimer(new Board(player), 0, getTick()).getTaskId());
+            getUserdata().addTaskID(player, "board", getScheduleHandler().runTimer(new Board(player), 0, getTick()).getTaskId());
         }
     }
     public void disable(Player player) {

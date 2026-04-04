@@ -9,11 +9,11 @@ public record Vanish(Player getPlayer) implements Runnable {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
-    private VanishHandler getVanishHandler() {
-        return getInstance().getVanishHandler();
-    }
     private Message getMessage() {
         return getInstance().getMessage();
+    }
+    private VanishHandler getVanishHandler() {
+        return getInstance().getVanishHandler();
     }
     @Override
     public void run() {

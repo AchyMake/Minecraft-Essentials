@@ -17,14 +17,14 @@ public class RepairCommand implements CommandExecutor, TabCompleter {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
+    private Message getMessage() {
+        return getInstance().getMessage();
+    }
     private Userdata getUserdata() {
         return getInstance().getUserdata();
     }
     private MaterialHandler getMaterialHandler() {
         return getInstance().getMaterialHandler();
-    }
-    private Message getMessage() {
-        return getInstance().getMessage();
     }
     public RepairCommand() {
         getInstance().getCommand("repair").setExecutor(this);

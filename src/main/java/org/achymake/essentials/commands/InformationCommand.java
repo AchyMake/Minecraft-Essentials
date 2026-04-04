@@ -19,17 +19,17 @@ public class InformationCommand implements CommandExecutor, TabCompleter {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
-    private Userdata getUserdata() {
-        return getInstance().getUserdata();
-    }
     private Bank getBank() {
         return getInstance().getBank();
     }
-    private EconomyHandler getEconomy() {
-        return getInstance().getEconomyHandler();
-    }
     private Message getMessage() {
         return getInstance().getMessage();
+    }
+    private Userdata getUserdata() {
+        return getInstance().getUserdata();
+    }
+    private EconomyHandler getEconomyHandler() {
+        return getInstance().getEconomyHandler();
     }
     public InformationCommand() {
         getInstance().getCommand("information").setExecutor(this);
@@ -43,11 +43,11 @@ public class InformationCommand implements CommandExecutor, TabCompleter {
                     var simpleDateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
                     player.sendMessage(getMessage().get("commands.information.title"));
                     player.sendMessage(getMessage().get("commands.information.name", offlinePlayer.getName()));
-                    player.sendMessage(getMessage().get("commands.information.account", getEconomy().currency()) + getEconomy().format(getEconomy().getAccount(offlinePlayer)));
-                    if (getEconomy().hasBank(offlinePlayer)) {
-                        var bank = getEconomy().getBank(offlinePlayer);
+                    player.sendMessage(getMessage().get("commands.information.account", getEconomyHandler().currency()) + getEconomyHandler().format(getEconomyHandler().getAccount(offlinePlayer)));
+                    if (getEconomyHandler().hasBank(offlinePlayer)) {
+                        var bank = getEconomyHandler().getBank(offlinePlayer);
                         player.sendMessage(getMessage().get("commands.information.bank.name", bank));
-                        player.sendMessage(getMessage().get("commands.information.bank.account", getEconomy().currency()) + getEconomy().format(getBank().get(bank)));
+                        player.sendMessage(getMessage().get("commands.information.bank.account", getEconomyHandler().currency()) + getEconomyHandler().format(getBank().get(bank)));
                         player.sendMessage(getMessage().get("commands.information.bank.owner", getBank().getOwner(bank).getName()));
                         var members = getBank().getMembers(bank);
                         if (!members.isEmpty()) {

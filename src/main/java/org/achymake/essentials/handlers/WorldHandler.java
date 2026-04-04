@@ -3,7 +3,11 @@ package org.achymake.essentials.handlers;
 import org.achymake.essentials.Essentials;
 import org.achymake.essentials.data.Message;
 import org.achymake.essentials.data.Userdata;
-import org.bukkit.*;
+import org.bukkit.GameRule;
+import org.bukkit.Location;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Item;
@@ -20,6 +24,9 @@ public class WorldHandler {
     private FileConfiguration getConfig() {
         return getInstance().getConfig();
     }
+    private Message getMessage() {
+        return getInstance().getMessage();
+    }
     private Userdata getUserdata() {
         return getInstance().getUserdata();
     }
@@ -28,9 +35,6 @@ public class WorldHandler {
     }
     private ScheduleHandler getScheduleHandler() {
         return getInstance().getScheduleHandler();
-    }
-    private Message getMessage() {
-        return getInstance().getMessage();
     }
     /**
      * get world

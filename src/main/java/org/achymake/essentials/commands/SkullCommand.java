@@ -19,17 +19,17 @@ public class SkullCommand implements CommandExecutor, TabCompleter {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
+    private Message getMessage() {
+        return getInstance().getMessage();
+    }
+    private Skulls getSkulls() {
+        return getInstance().getSkulls();
+    }
     private Userdata getUserdata() {
         return getInstance().getUserdata();
     }
     private MaterialHandler getMaterialHandler() {
         return getInstance().getMaterialHandler();
-    }
-    private Skulls getSkulls() {
-        return getInstance().getSkulls();
-    }
-    private Message getMessage() {
-        return getInstance().getMessage();
     }
     public SkullCommand() {
         getInstance().getCommand("skull").setExecutor(this);

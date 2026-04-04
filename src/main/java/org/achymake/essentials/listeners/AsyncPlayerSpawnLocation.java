@@ -35,7 +35,7 @@ public class AsyncPlayerSpawnLocation implements Listener {
             getUserdata().setLocation(offlinePlayer, quit, "join");
         } else if (getSpawn().getLocation() != null) {
             event.setSpawnLocation(getSpawn().getLocation());
-            getUserdata().setLocation(offlinePlayer, event.getSpawnLocation(), "join");
+            getUserdata().setLocation(offlinePlayer, getSpawn().getLocation(), "join");
         } else getUserdata().setLocation(offlinePlayer, event.getSpawnLocation(), "join");
     }
 }

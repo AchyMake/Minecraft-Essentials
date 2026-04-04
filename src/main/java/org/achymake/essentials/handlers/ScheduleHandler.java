@@ -8,7 +8,7 @@ public class ScheduleHandler {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
-    private BukkitScheduler getScheduler() {
+    private BukkitScheduler getBukkitScheduler() {
         return getInstance().getBukkitScheduler();
     }
     /**
@@ -20,7 +20,7 @@ public class ScheduleHandler {
      * @since many moons ago
      */
     public BukkitTask runTimer(Runnable runnable, long tick, long period) {
-        return getScheduler().runTaskTimer(getInstance(), runnable, tick, period);
+        return getBukkitScheduler().runTaskTimer(getInstance(), runnable, tick, period);
     }
     /**
      * run task later
@@ -30,7 +30,7 @@ public class ScheduleHandler {
      * @since many moons ago
      */
     public BukkitTask runLater(Runnable runnable, long tick) {
-        return getScheduler().runTaskLater(getInstance(), runnable, tick);
+        return getBukkitScheduler().runTaskLater(getInstance(), runnable, tick);
     }
     /**
      * run asynchronously task
@@ -38,7 +38,7 @@ public class ScheduleHandler {
      * @since many moons ago
      */
     public void runAsynchronously(Runnable runnable) {
-        getScheduler().runTaskAsynchronously(getInstance(), runnable);
+        getBukkitScheduler().runTaskAsynchronously(getInstance(), runnable);
     }
     /**
      * is taskID queued
@@ -46,7 +46,7 @@ public class ScheduleHandler {
      * @since many moons ago
      */
     public boolean isQueued(int taskID) {
-        return getScheduler().isQueued(taskID);
+        return getBukkitScheduler().isQueued(taskID);
     }
     /**
      * cancel taskID if taskID is queued
@@ -55,7 +55,7 @@ public class ScheduleHandler {
      */
     public void cancel(int taskID) {
         if (isQueued(taskID)) {
-            getScheduler().cancelTask(taskID);
+            getBukkitScheduler().cancelTask(taskID);
         }
     }
     /**
@@ -63,6 +63,6 @@ public class ScheduleHandler {
      * @since many moons ago
      */
     public void disable() {
-        getScheduler().cancelTasks(getInstance());
+        getBukkitScheduler().cancelTasks(getInstance());
     }
 }

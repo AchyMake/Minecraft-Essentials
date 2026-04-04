@@ -18,6 +18,9 @@ public class InventoryHandler {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
+    private Message getMessage() {
+        return getInstance().getMessage();
+    }
     private MaterialHandler getMaterialHandler() {
         return getInstance().getMaterialHandler();
     }
@@ -26,9 +29,6 @@ public class InventoryHandler {
     }
     private boolean isBukkit() {
         return getInstance().isBukkit();
-    }
-    private Message getMessage() {
-        return getInstance().getMessage();
     }
     public Inventory create(int size, String title) {
         return getInstance().getServer().createInventory(null, size, getMessage().addColor(title));

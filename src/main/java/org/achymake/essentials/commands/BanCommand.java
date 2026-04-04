@@ -18,14 +18,14 @@ public class BanCommand implements CommandExecutor, TabCompleter {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
+    private Message getMessage() {
+        return getInstance().getMessage();
+    }
     private Userdata getUserdata() {
         return getInstance().getUserdata();
     }
     private DateHandler getDateHandler() {
         return getInstance().getDateHandler();
-    }
-    private Message getMessage() {
-        return getInstance().getMessage();
     }
     public BanCommand() {
         getInstance().getCommand("ban").setExecutor(this);

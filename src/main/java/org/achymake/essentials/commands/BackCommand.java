@@ -18,14 +18,14 @@ public class BackCommand implements CommandExecutor, TabCompleter {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
+    private Message getMessage() {
+        return getInstance().getMessage();
+    }
     private Userdata getUserdata() {
         return getInstance().getUserdata();
     }
     private WorldHandler getWorldHandler() {
         return getInstance().getWorldHandler();
-    }
-    private Message getMessage() {
-        return getInstance().getMessage();
     }
     public BackCommand() {
         getInstance().getCommand("back").setExecutor(this);

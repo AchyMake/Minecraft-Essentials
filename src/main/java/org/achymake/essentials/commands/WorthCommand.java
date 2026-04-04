@@ -19,17 +19,17 @@ public class WorthCommand implements CommandExecutor, TabCompleter {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
-    private MaterialHandler getMaterialHandler() {
-        return getInstance().getMaterialHandler();
-    }
-    private EconomyHandler getEconomy() {
-        return getInstance().getEconomyHandler();
+    private Message getMessage() {
+        return getInstance().getMessage();
     }
     private Worth getWorth() {
         return getInstance().getWorth();
     }
-    private Message getMessage() {
-        return getInstance().getMessage();
+    private MaterialHandler getMaterialHandler() {
+        return getInstance().getMaterialHandler();
+    }
+    private EconomyHandler getEconomyHandler() {
+        return getInstance().getEconomyHandler();
     }
     public WorthCommand() {
         getInstance().getCommand("worth").setExecutor(this);
@@ -41,7 +41,7 @@ public class WorthCommand implements CommandExecutor, TabCompleter {
                 var itemName = getMessage().toTitleCase(args[0]);
                 var material = getMaterialHandler().get(args[0]);
                 if (getWorth().isListed(material)) {
-                    player.sendMessage(getMessage().get("commands.worth.listed", itemName, getEconomy().currency() + getEconomy().format(getWorth().get(material))));
+                    player.sendMessage(getMessage().get("commands.worth.listed", itemName, getEconomyHandler().currency() + getEconomyHandler().format(getWorth().get(material))));
                 } else player.sendMessage(getMessage().get("commands.worth.unlisted", itemName));
                 return true;
             }
@@ -50,7 +50,7 @@ public class WorthCommand implements CommandExecutor, TabCompleter {
                 var itemName = getMessage().toTitleCase(args[0]);
                 var material = getMaterialHandler().get(args[0]);
                 if (getWorth().isListed(material)) {
-                    consoleCommandSender.sendMessage(getMessage().get("commands.worth.listed", itemName, getEconomy().currency() + getEconomy().format(getWorth().get(material))));
+                    consoleCommandSender.sendMessage(getMessage().get("commands.worth.listed", itemName, getEconomyHandler().currency() + getEconomyHandler().format(getWorth().get(material))));
                 } else consoleCommandSender.sendMessage(getMessage().get("commands.worth.unlisted", itemName));
                 return true;
             }

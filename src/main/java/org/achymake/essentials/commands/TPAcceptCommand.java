@@ -17,13 +17,13 @@ public class TPAcceptCommand implements CommandExecutor, TabCompleter {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
-    private Userdata getUserdata() {
-        return getInstance().getUserdata();
-    }
     private Message getMessage() {
         return getInstance().getMessage();
     }
-    private ScheduleHandler getScheduler() {
+    private Userdata getUserdata() {
+        return getInstance().getUserdata();
+    }
+    private ScheduleHandler getScheduleHandler() {
         return getInstance().getScheduleHandler();
     }
     public TPAcceptCommand() {
@@ -37,7 +37,7 @@ public class TPAcceptCommand implements CommandExecutor, TabCompleter {
                     var target = getUserdata().getTpaFrom(player);
                     if (target != null) {
                         var tpaTask = getUserdata().getTaskID(target, "tpa");
-                        if (getScheduler().isQueued(tpaTask)) {
+                        if (getScheduleHandler().isQueued(tpaTask)) {
                             target.sendMessage(getMessage().get("commands.tpaccept.tpa.target", player.getName()));
                             player.sendMessage(getMessage().get("commands.tpaccept.tpa.sender", target.getName()));
                             getMessage().sendActionBar(target, getMessage().get("events.teleport.success", player.getName()));
@@ -52,7 +52,7 @@ public class TPAcceptCommand implements CommandExecutor, TabCompleter {
                     var target = getUserdata().getTpaHereFrom(player);
                     if (target != null) {
                         var tpaHereTask = getUserdata().getTaskID(target, "tpahere");
-                        if (getScheduler().isQueued(tpaHereTask)) {
+                        if (getScheduleHandler().isQueued(tpaHereTask)) {
                             target.sendMessage(getMessage().get("commands.tpaccept.tpahere.target", player.getName()));
                             player.sendMessage(getMessage().get("commands.tpaccept.tpahere.sender", target.getName()));
                             getMessage().sendActionBar(player, getMessage().get("events.teleport.success", target.getName()));

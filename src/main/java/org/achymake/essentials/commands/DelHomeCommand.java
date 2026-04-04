@@ -16,11 +16,11 @@ public class DelHomeCommand implements CommandExecutor, TabCompleter {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
-    private Userdata getUserdata() {
-        return getInstance().getUserdata();
-    }
     private Message getMessage() {
         return getInstance().getMessage();
+    }
+    private Userdata getUserdata() {
+        return getInstance().getUserdata();
     }
     public DelHomeCommand() {
         getInstance().getCommand("delhome").setExecutor(this);

@@ -26,7 +26,7 @@ public class UpdateChecker {
     private Message getMessage() {
         return getInstance().getMessage();
     }
-    private ScheduleHandler getScheduler() {
+    private ScheduleHandler getScheduleHandler() {
         return getInstance().getScheduleHandler();
     }
     public String getResourceID() {
@@ -35,7 +35,7 @@ public class UpdateChecker {
     public void getUpdate(Player player) {
         if (!player.hasPermission("essentials.event.join.update"))return;
         if (!getConfig().getBoolean("notify-update"))return;
-        getScheduler().runLater(() -> getLatest((latest) -> {
+        getScheduleHandler().runLater(() -> getLatest((latest) -> {
             if (getVersion().equals(latest))return;
             player.sendMessage(getMessage().addColor(getName() + "&6 has new update"));
             player.sendMessage(getMessage().addColor("-&a https://www.spigotmc.org/resources/" + getResourceID() + "/"));
@@ -43,7 +43,7 @@ public class UpdateChecker {
     }
     public void getUpdate() {
         if (!getConfig().getBoolean("notify-update"))return;
-        getScheduler().runAsynchronously(() -> getLatest((latest) -> {
+        getScheduleHandler().runAsynchronously(() -> getLatest((latest) -> {
             if (getVersion().equals(latest))return;
             getInstance().sendInfo(getName() + " has new update:");
             getInstance().sendInfo("- https://www.spigotmc.org/resources/" + getResourceID() + "/");

@@ -28,8 +28,9 @@ public class HangingBreakByEntity implements Listener {
     }
     @EventHandler(priority = EventPriority.NORMAL)
     public void onHangingBreakByEntity(HangingBreakByEntityEvent event) {
-        if (!getEntityHandler().disableHangingBreakByEntity(event.getRemover().getType(), event.getEntity().getType())) {
-            if (event.getRemover() instanceof Player player) {
+        var remover = event.getRemover();
+        if (!getEntityHandler().disableHangingBreakByEntity(remover.getType(), event.getEntity().getType())) {
+            if (remover instanceof Player player) {
                 if (!getUserdata().isDisabled(player))return;
                 event.setCancelled(true);
             }

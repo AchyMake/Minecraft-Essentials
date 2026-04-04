@@ -14,14 +14,14 @@ public class AsyncPlayerChat implements Listener {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
+    private Message getMessage() {
+        return getInstance().getMessage();
+    }
     private Userdata getUserdata() {
         return getInstance().getUserdata();
     }
     private VanishHandler getVanishHandler() {
         return getInstance().getVanishHandler();
-    }
-    private Message getMessage() {
-        return getInstance().getMessage();
     }
     private PluginManager getPluginManager() {
         return getInstance().getPluginManager();

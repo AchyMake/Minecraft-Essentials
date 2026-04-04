@@ -9,11 +9,11 @@ public record Tab(Player getPlayer) implements Runnable {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
-    private TablistHandler getTablistHandler() {
-        return getInstance().getTablistHandler();
-    }
     private Message getMessage() {
         return getInstance().getMessage();
+    }
+    private TablistHandler getTablistHandler() {
+        return getInstance().getTablistHandler();
     }
     private String getHeader() {
         var world = getPlayer().getWorld();

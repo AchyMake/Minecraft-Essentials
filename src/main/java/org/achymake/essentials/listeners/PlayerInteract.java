@@ -23,7 +23,7 @@ public class PlayerInteract implements Listener {
     private Userdata getUserdata() {
         return getInstance().getUserdata();
     }
-    private MaterialHandler getMaterials() {
+    private MaterialHandler getMaterialHandler() {
         return getInstance().getMaterialHandler();
     }
     private PluginManager getPluginManager() {
@@ -43,15 +43,15 @@ public class PlayerInteract implements Listener {
             event.setUseItemInHand(Event.Result.DENY);
             event.setUseInteractedBlock(Event.Result.DENY);
         } else if (event.getAction().equals(Action.PHYSICAL)) {
-            if (event.getClickedBlock().getType() == getMaterials().get("farmland")) {
+            if (event.getClickedBlock().getType() == getMaterialHandler().get("farmland")) {
                 if (!getConfig().getBoolean("crops.disable-tramping-farmland"))return;
                 event.setCancelled(true);
                 event.setUseInteractedBlock(Event.Result.DENY);
-            } else if (event.getClickedBlock().getType() == getMaterials().get("turtle_egg")) {
+            } else if (event.getClickedBlock().getType() == getMaterialHandler().get("turtle_egg")) {
                 if (!getConfig().getBoolean("eggs.disable-tramping-turtle-egg"))return;
                 event.setCancelled(true);
                 event.setUseInteractedBlock(Event.Result.DENY);
-            } else if (event.getClickedBlock().getType() == getMaterials().get("sniffer_egg")) {
+            } else if (event.getClickedBlock().getType() == getMaterialHandler().get("sniffer_egg")) {
                 if (!getConfig().getBoolean("eggs.disable-tramping-sniffer-egg"))return;
                 event.setCancelled(true);
                 event.setUseInteractedBlock(Event.Result.DENY);

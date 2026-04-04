@@ -27,6 +27,9 @@ public class Userdata {
     private FileConfiguration getConfig() {
         return getInstance().getConfig();
     }
+    private Message getMessage() {
+        return getInstance().getMessage();
+    }
     private EconomyHandler getEconomyHandler() {
         return getInstance().getEconomyHandler();
     }
@@ -41,9 +44,6 @@ public class Userdata {
     }
     private WorldHandler getWorldHandler() {
         return getInstance().getWorldHandler();
-    }
-    private Message getMessage() {
-        return getInstance().getMessage();
     }
     /**
      * gets userdata/uuid.yml
@@ -987,6 +987,10 @@ public class Userdata {
         }
         if (player.isInvulnerable()) {
             player.setInvulnerable(false);
+        }
+        getInstance().getTablistHandler().disable(player);
+        if (hasBoard(player)) {
+            getInstance().getScoreboardHandler().disable(player);
         }
         getInstance().getInventoryHandler().getInventories().remove(player);
     }

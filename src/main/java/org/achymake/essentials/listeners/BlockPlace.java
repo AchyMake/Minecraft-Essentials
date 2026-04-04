@@ -21,6 +21,9 @@ public class BlockPlace implements Listener {
     private FileConfiguration getConfig() {
         return getInstance().getConfig();
     }
+    private Message getMessage() {
+        return getInstance().getMessage();
+    }
     private Userdata getUserdata() {
         return getInstance().getUserdata();
     }
@@ -29,9 +32,6 @@ public class BlockPlace implements Listener {
     }
     private EntityHandler getEntityHandler() {
         return getInstance().getEntityHandler();
-    }
-    private Message getMessage() {
-        return getInstance().getMessage();
     }
     private PluginManager getPluginManager() {
         return getInstance().getPluginManager();

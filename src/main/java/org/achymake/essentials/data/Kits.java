@@ -17,11 +17,11 @@ public class Kits {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
-    private MaterialHandler getMaterialHandler() {
-        return getInstance().getMaterialHandler();
-    }
     private Message getMessage() {
         return getInstance().getMessage();
+    }
+    private MaterialHandler getMaterialHandler() {
+        return getInstance().getMaterialHandler();
     }
     private final File file = new File(getInstance().getDataFolder(), "kits.yml");
     private FileConfiguration config = YamlConfiguration.loadConfiguration(file);

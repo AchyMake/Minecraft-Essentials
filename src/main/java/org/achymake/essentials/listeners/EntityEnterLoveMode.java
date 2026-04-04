@@ -14,11 +14,11 @@ public class EntityEnterLoveMode implements Listener {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
-    private EntityHandler getEntityHandler() {
-        return getInstance().getEntityHandler();
-    }
     private Message getMessage() {
         return getInstance().getMessage();
+    }
+    private EntityHandler getEntityHandler() {
+        return getInstance().getEntityHandler();
     }
     private PluginManager getPluginManager() {
         return getInstance().getPluginManager();
@@ -31,7 +31,8 @@ public class EntityEnterLoveMode implements Listener {
         if (event.getHumanEntity() instanceof Player player) {
             if (!getEntityHandler().isOverChunkLimit(event.getEntity()))return;
             event.setCancelled(true);
-            getMessage().sendActionBar(player, getMessage().get("events.breed", getMessage().toTitleCase(event.getEntityType().toString()), String.valueOf(getEntityHandler().getChunkLimit(event.getEntityType()))));
+            var entityType = event.getEntityType();
+            getMessage().sendActionBar(player, getMessage().get("events.breed", getMessage().toTitleCase(entityType.toString()), String.valueOf(getEntityHandler().getChunkLimit(entityType))));
         }
     }
 }

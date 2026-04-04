@@ -18,6 +18,9 @@ public class HatCommand implements CommandExecutor, TabCompleter {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
+    private Message getMessage() {
+        return getInstance().getMessage();
+    }
     private Userdata getUserdata() {
         return getInstance().getUserdata();
     }
@@ -26,9 +29,6 @@ public class HatCommand implements CommandExecutor, TabCompleter {
     }
     private MaterialHandler getMaterialHandler() {
         return getInstance().getMaterialHandler();
-    }
-    private Message getMessage() {
-        return getInstance().getMessage();
     }
     public HatCommand() {
         getInstance().getCommand("hat").setExecutor(this);

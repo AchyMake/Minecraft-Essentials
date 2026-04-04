@@ -17,14 +17,14 @@ public class LightningCommand implements CommandExecutor, TabCompleter {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
+    private Message getMessage() {
+        return getInstance().getMessage();
+    }
     private Userdata getUserdata() {
         return getInstance().getUserdata();
     }
     private WorldHandler getWorldHandler() {
         return getInstance().getWorldHandler();
-    }
-    private Message getMessage() {
-        return getInstance().getMessage();
     }
     public LightningCommand() {
         getInstance().getCommand("lightning").setExecutor(this);

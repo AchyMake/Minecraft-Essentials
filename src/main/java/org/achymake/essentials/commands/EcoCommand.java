@@ -18,14 +18,14 @@ public class EcoCommand implements CommandExecutor, TabCompleter {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
+    private Message getMessage() {
+        return getInstance().getMessage();
+    }
     private Userdata getUserdata() {
         return getInstance().getUserdata();
     }
-    private EconomyHandler getEconomy() {
+    private EconomyHandler getEconomyHandler() {
         return getInstance().getEconomyHandler();
-    }
-    private Message getMessage() {
-        return getInstance().getMessage();
     }
     public EcoCommand() {
         getInstance().getCommand("eco").setExecutor(this);
@@ -37,8 +37,8 @@ public class EcoCommand implements CommandExecutor, TabCompleter {
                 var offlinePlayer = getInstance().getOfflinePlayer(args[1]);
                 if (args[0].equalsIgnoreCase("reset")) {
                     if (getUserdata().exists(offlinePlayer)) {
-                        if (getEconomy().set(offlinePlayer, getEconomy().getStartingBalance())) {
-                            player.sendMessage(getMessage().get("commands.eco.reset", offlinePlayer.getName(), getEconomy().currency() + getEconomy().format(getEconomy().getStartingBalance())));
+                        if (getEconomyHandler().set(offlinePlayer, getEconomyHandler().getStartingBalance())) {
+                            player.sendMessage(getMessage().get("commands.eco.reset", offlinePlayer.getName(), getEconomyHandler().currency() + getEconomyHandler().format(getEconomyHandler().getStartingBalance())));
                         } else player.sendMessage(getMessage().get("error.file.exception", getUserdata().getFile(offlinePlayer).getName()));
                     } else player.sendMessage(getMessage().get("error.target.invalid", offlinePlayer.getName()));
                     return true;
@@ -48,24 +48,24 @@ public class EcoCommand implements CommandExecutor, TabCompleter {
                 var value = Double.parseDouble(args[2]);
                 if (args[0].equalsIgnoreCase("add")) {
                     if (getUserdata().exists(offlinePlayer)) {
-                        if (getEconomy().add(offlinePlayer, value)) {
-                            player.sendMessage(getMessage().get("commands.eco.add", getEconomy().currency() + getEconomy().format(value), offlinePlayer.getName()));
+                        if (getEconomyHandler().add(offlinePlayer, value)) {
+                            player.sendMessage(getMessage().get("commands.eco.add", getEconomyHandler().currency() + getEconomyHandler().format(value), offlinePlayer.getName()));
                         } else player.sendMessage(getMessage().get("error.file.exception", getUserdata().getFile(offlinePlayer).getName()));
                     } else player.sendMessage(getMessage().get("error.target.invalid", offlinePlayer.getName()));
                     return true;
                 } else if (args[0].equalsIgnoreCase("remove")) {
                     if (getUserdata().exists(offlinePlayer)) {
-                        if (getEconomy().has(offlinePlayer, value)) {
-                            if (getEconomy().remove(offlinePlayer, value)) {
-                                player.sendMessage(getMessage().get("commands.eco.remove.success", getEconomy().currency() + getEconomy().format(value), offlinePlayer.getName()));
+                        if (getEconomyHandler().has(offlinePlayer, value)) {
+                            if (getEconomyHandler().remove(offlinePlayer, value)) {
+                                player.sendMessage(getMessage().get("commands.eco.remove.success", getEconomyHandler().currency() + getEconomyHandler().format(value), offlinePlayer.getName()));
                             } else player.sendMessage(getMessage().get("error.file.exception", getUserdata().getFile(offlinePlayer).getName()));
-                        } else player.sendMessage(getMessage().get("commands.eco.remove.insufficient-funds", offlinePlayer.getName(), getEconomy().currency() + getEconomy().format(value)));
+                        } else player.sendMessage(getMessage().get("commands.eco.remove.insufficient-funds", offlinePlayer.getName(), getEconomyHandler().currency() + getEconomyHandler().format(value)));
                     } else player.sendMessage(getMessage().get("error.target.invalid", offlinePlayer.getName()));
                     return true;
                 } else if (args[0].equalsIgnoreCase("set")) {
                     if (getUserdata().exists(offlinePlayer)) {
-                        if (getEconomy().set(offlinePlayer, value)) {
-                            player.sendMessage(getMessage().get("commands.eco.set", getEconomy().currency() + getEconomy().format(value), offlinePlayer.getName()));
+                        if (getEconomyHandler().set(offlinePlayer, value)) {
+                            player.sendMessage(getMessage().get("commands.eco.set", getEconomyHandler().currency() + getEconomyHandler().format(value), offlinePlayer.getName()));
                         } else player.sendMessage(getMessage().get("error.file.exception", getUserdata().getFile(offlinePlayer).getName()));
                     } else player.sendMessage(getMessage().get("error.target.invalid", offlinePlayer.getName()));
                     return true;
@@ -76,8 +76,8 @@ public class EcoCommand implements CommandExecutor, TabCompleter {
                 var offlinePlayer = getInstance().getOfflinePlayer(args[1]);
                 if (args[0].equalsIgnoreCase("reset")) {
                     if (getUserdata().exists(offlinePlayer)) {
-                        if (getEconomy().set(offlinePlayer, getEconomy().getStartingBalance())) {
-                            consoleCommandSender.sendMessage(getMessage().get("commands.eco.reset", offlinePlayer.getName(), getEconomy().currency() + getEconomy().format(getEconomy().getStartingBalance())));
+                        if (getEconomyHandler().set(offlinePlayer, getEconomyHandler().getStartingBalance())) {
+                            consoleCommandSender.sendMessage(getMessage().get("commands.eco.reset", offlinePlayer.getName(), getEconomyHandler().currency() + getEconomyHandler().format(getEconomyHandler().getStartingBalance())));
                         } else consoleCommandSender.sendMessage(getMessage().get("error.file.exception", getUserdata().getFile(offlinePlayer).getName()));
                     } else consoleCommandSender.sendMessage(getMessage().get("error.target.invalid", offlinePlayer.getName()));
                     return true;
@@ -87,24 +87,24 @@ public class EcoCommand implements CommandExecutor, TabCompleter {
                 var value = Double.parseDouble(args[2]);
                 if (args[0].equalsIgnoreCase("add")) {
                     if (getUserdata().exists(offlinePlayer)) {
-                        if (getEconomy().add(offlinePlayer, value)) {
-                            consoleCommandSender.sendMessage(getMessage().get("commands.eco.add", getEconomy().currency() + getEconomy().format(value), offlinePlayer.getName()));
+                        if (getEconomyHandler().add(offlinePlayer, value)) {
+                            consoleCommandSender.sendMessage(getMessage().get("commands.eco.add", getEconomyHandler().currency() + getEconomyHandler().format(value), offlinePlayer.getName()));
                         } else consoleCommandSender.sendMessage(getMessage().get("error.file.exception", getUserdata().getFile(offlinePlayer).getName()));
                     } else consoleCommandSender.sendMessage(getMessage().get("error.target.invalid", offlinePlayer.getName()));
                     return true;
                 } else if (args[0].equalsIgnoreCase("remove")) {
                     if (getUserdata().exists(offlinePlayer)) {
-                        if (getEconomy().has(offlinePlayer, value)) {
-                            if (getEconomy().remove(offlinePlayer, value)) {
-                                consoleCommandSender.sendMessage(getMessage().get("commands.eco.remove.success", getEconomy().currency() + getEconomy().format(value), offlinePlayer.getName()));
+                        if (getEconomyHandler().has(offlinePlayer, value)) {
+                            if (getEconomyHandler().remove(offlinePlayer, value)) {
+                                consoleCommandSender.sendMessage(getMessage().get("commands.eco.remove.success", getEconomyHandler().currency() + getEconomyHandler().format(value), offlinePlayer.getName()));
                             } else consoleCommandSender.sendMessage(getMessage().get("error.file.exception", getUserdata().getFile(offlinePlayer).getName()));
-                        } else consoleCommandSender.sendMessage(getMessage().get("commands.eco.remove.insufficient-funds", offlinePlayer.getName(), getEconomy().currency() + getEconomy().format(value)));
+                        } else consoleCommandSender.sendMessage(getMessage().get("commands.eco.remove.insufficient-funds", offlinePlayer.getName(), getEconomyHandler().currency() + getEconomyHandler().format(value)));
                     } else consoleCommandSender.sendMessage(getMessage().get("error.target.invalid", offlinePlayer.getName()));
                     return true;
                 } else if (args[0].equalsIgnoreCase("set")) {
                     if (getUserdata().exists(offlinePlayer)) {
-                        if (getEconomy().set(offlinePlayer, value)) {
-                            consoleCommandSender.sendMessage(getMessage().get("commands.eco.set", getEconomy().currency() + getEconomy().format(value), offlinePlayer.getName()));
+                        if (getEconomyHandler().set(offlinePlayer, value)) {
+                            consoleCommandSender.sendMessage(getMessage().get("commands.eco.set", getEconomyHandler().currency() + getEconomyHandler().format(value), offlinePlayer.getName()));
                         } else consoleCommandSender.sendMessage(getMessage().get("error.file.exception", getUserdata().getFile(offlinePlayer).getName()));
                     } else consoleCommandSender.sendMessage(getMessage().get("error.target.invalid", offlinePlayer.getName()));
                     return true;

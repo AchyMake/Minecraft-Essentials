@@ -20,11 +20,11 @@ public class BlockBreak implements Listener {
     private FileConfiguration getConfig() {
         return getInstance().getConfig();
     }
-    private Userdata getUserdata() {
-        return getInstance().getUserdata();
-    }
     private Message getMessage() {
         return getInstance().getMessage();
+    }
+    private Userdata getUserdata() {
+        return getInstance().getUserdata();
     }
     private MaterialHandler getMaterialHandler() {
         return getInstance().getMaterialHandler();

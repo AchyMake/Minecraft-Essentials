@@ -26,11 +26,11 @@ public class MaterialHandler {
     private FileConfiguration getConfig() {
         return getInstance().getConfig();
     }
-    private WorldHandler getWorldHandler() {
-        return getInstance().getWorldHandler();
-    }
     private Message getMessage() {
         return getInstance().getMessage();
+    }
+    private WorldHandler getWorldHandler() {
+        return getInstance().getWorldHandler();
     }
     public PersistentDataContainer getData(ItemStack itemStack) {
         var meta = itemStack.getItemMeta();

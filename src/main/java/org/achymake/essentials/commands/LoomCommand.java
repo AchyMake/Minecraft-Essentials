@@ -18,14 +18,14 @@ public class LoomCommand implements CommandExecutor, TabCompleter {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
+    private Message getMessage() {
+        return getInstance().getMessage();
+    }
     private Userdata getUserdata() {
         return getInstance().getUserdata();
     }
     private InventoryHandler getInventoryHandler() {
         return getInstance().getInventoryHandler();
-    }
-    private Message getMessage() {
-        return getInstance().getMessage();
     }
     public LoomCommand() {
         getInstance().getCommand("loom").setExecutor(this);

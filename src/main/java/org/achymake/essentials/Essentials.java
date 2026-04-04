@@ -12,6 +12,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.ServicesManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
+import org.bukkit.scoreboard.ScoreboardManager;
 
 import java.io.File;
 import java.util.Collection;
@@ -45,9 +46,10 @@ public final class Essentials extends JavaPlugin {
     private WorldHandler worldHandler;
     private LuckPermsProvider luckPermsProvider;
     private UpdateChecker updateChecker;
+    private ScoreboardManager scoreboardManager;
     private BukkitScheduler bukkitScheduler;
-    private PluginManager pluginManager;
     private ServicesManager servicesManager;
+    private PluginManager pluginManager;
     @Override
     public void onEnable() {
         instance = this;
@@ -77,9 +79,10 @@ public final class Essentials extends JavaPlugin {
         worldHandler = new WorldHandler();
         luckPermsProvider = new LuckPermsProvider();
         updateChecker = new UpdateChecker();
+        scoreboardManager = getServer().getScoreboardManager();
         bukkitScheduler = getServer().getScheduler();
-        pluginManager = getServer().getPluginManager();
         servicesManager = getServer().getServicesManager();
+        pluginManager = getServer().getPluginManager();
         commands();
         events();
         reload();
@@ -279,14 +282,17 @@ public final class Essentials extends JavaPlugin {
     public Collection<? extends OfflinePlayer> getOfflinePlayers() {
         return getUserdata().getOfflinePlayers();
     }
-    public ServicesManager getServicesManager() {
-        return servicesManager;
-    }
     public PluginManager getPluginManager() {
         return pluginManager;
     }
+    public ServicesManager getServicesManager() {
+        return servicesManager;
+    }
     public BukkitScheduler getBukkitScheduler() {
         return bukkitScheduler;
+    }
+    public ScoreboardManager getScoreboardManager() {
+        return scoreboardManager;
     }
     public UpdateChecker getUpdateChecker() {
         return updateChecker;

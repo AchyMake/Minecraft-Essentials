@@ -16,7 +16,7 @@ public class BlockRedstone implements Listener {
     private FileConfiguration getConfig() {
         return getInstance().getConfig();
     }
-    private MaterialHandler getMaterials() {
+    private MaterialHandler getMaterialHandler() {
         return getInstance().getMaterialHandler();
     }
     private PluginManager getPluginManager() {
@@ -29,7 +29,7 @@ public class BlockRedstone implements Listener {
     public void onBlockRedstone(BlockRedstoneEvent event) {
         if (!getConfig().getBoolean("physics.disable-redstone"))return;
         var material = event.getBlock().getType();
-        if (!getMaterials().isRedstone(material))return;
+        if (!getMaterialHandler().isRedstone(material))return;
         event.setNewCurrent(event.getOldCurrent());
     }
 }

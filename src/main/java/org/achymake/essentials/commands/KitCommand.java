@@ -20,20 +20,20 @@ public class KitCommand implements CommandExecutor, TabCompleter {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
-    private Userdata getUserdata() {
-        return getInstance().getUserdata();
-    }
-    private EconomyHandler getEconomy() {
-        return getInstance().getEconomyHandler();
+    private Message getMessage() {
+        return getInstance().getMessage();
     }
     private Kits getKits() {
         return getInstance().getKits();
     }
+    private Userdata getUserdata() {
+        return getInstance().getUserdata();
+    }
+    private EconomyHandler getEconomyHandler() {
+        return getInstance().getEconomyHandler();
+    }
     private MaterialHandler getMaterialHandler() {
         return getInstance().getMaterialHandler();
-    }
-    private Message getMessage() {
-        return getInstance().getMessage();
     }
     public KitCommand() {
         getInstance().getCommand("kit").setExecutor(this);
@@ -58,13 +58,13 @@ public class KitCommand implements CommandExecutor, TabCompleter {
                         if (getKits().hasCooldown(kitName)) {
                             if (!getUserdata().hasCooldown(player, "kit-" + kitName, getKits().getCooldown(kitName))) {
                                 if (getKits().hasPrice(kitName)) {
-                                    if (getEconomy().has(player, getKits().getPrice(kitName))) {
-                                        if (getEconomy().remove(player, getKits().getPrice(kitName))) {
+                                    if (getEconomyHandler().has(player, getKits().getPrice(kitName))) {
+                                        if (getEconomyHandler().remove(player, getKits().getPrice(kitName))) {
                                             getMaterialHandler().giveItemStacks(player, getKits().get(kitName));
                                             getUserdata().addCooldown(player, "kit-" + kitName, getKits().getCooldown(kitName));
                                             player.sendMessage(getMessage().get("commands.kit.received", kitName));
                                         }
-                                    } else player.sendMessage(getMessage().get("commands.kit.insufficient-funds", getEconomy().currency() + getEconomy().format(getKits().getPrice(kitName)), kitName));
+                                    } else player.sendMessage(getMessage().get("commands.kit.insufficient-funds", getEconomyHandler().currency() + getEconomyHandler().format(getKits().getPrice(kitName)), kitName));
                                 } else {
                                     getMaterialHandler().giveItemStacks(player, getKits().get(kitName));
                                     getUserdata().addCooldown(player, "kit-" + kitName, getKits().getCooldown(kitName));
@@ -72,12 +72,12 @@ public class KitCommand implements CommandExecutor, TabCompleter {
                                 }
                             } else player.sendMessage(getMessage().get("commands.kit.cooldown", getUserdata().getCooldown(player, "kit-" + kitName, getKits().getCooldown(kitName))));
                         } else if (getKits().hasPrice(kitName)) {
-                            if (getEconomy().has(player, getKits().getPrice(kitName))) {
-                                if (getEconomy().remove(player, getKits().getPrice(kitName))) {
+                            if (getEconomyHandler().has(player, getKits().getPrice(kitName))) {
+                                if (getEconomyHandler().remove(player, getKits().getPrice(kitName))) {
                                     getMaterialHandler().giveItemStacks(player, getKits().get(kitName));
                                     player.sendMessage(getMessage().get("commands.kit.received", kitName));
                                 }
-                            } else player.sendMessage(getMessage().get("commands.kit.insufficient-funds", getEconomy().currency() + getEconomy().format(getKits().getPrice(kitName)), kitName));
+                            } else player.sendMessage(getMessage().get("commands.kit.insufficient-funds", getEconomyHandler().currency() + getEconomyHandler().format(getKits().getPrice(kitName)), kitName));
                         } else {
                             getMaterialHandler().giveItemStacks(player, getKits().get(kitName));
                             player.sendMessage(getMessage().get("commands.kit.received", kitName));

@@ -16,11 +16,11 @@ public class SetJailCommand implements CommandExecutor, TabCompleter {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
-    private Jail getJail() {
-        return getInstance().getJail();
-    }
     private Message getMessage() {
         return getInstance().getMessage();
+    }
+    private Jail getJail() {
+        return getInstance().getJail();
     }
     public SetJailCommand() {
         getInstance().getCommand("setjail").setExecutor(this);
