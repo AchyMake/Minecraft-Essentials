@@ -219,6 +219,7 @@ public final class Essentials extends JavaPlugin {
         new PlayerDeath();
         new PlayerGameModeChange();
         new PlayerHarvestBlock();
+        new PlayerInput();
         new PlayerInteract();
         new PlayerInteractEntity();
         new PlayerJoin();

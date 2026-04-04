@@ -21,9 +21,6 @@ public record Board(Player getPlayer) implements Runnable {
     private ScoreboardManager getScoreboardManager() {
         return getInstance().getServer().getScoreboardManager();
     }
-    private Scoreboard getMainScoreboard() {
-        return getScoreboardManager().getMainScoreboard();
-    }
     private Scoreboard getNewScoreboard() {
         return getScoreboardManager().getNewScoreboard();
     }
@@ -52,41 +49,22 @@ public record Board(Player getPlayer) implements Runnable {
         }
         return listed;
     }
-    private void update() {
-        var scoreboard = getMainScoreboard();
-        var sidebar = scoreboard.getObjective(getPlayer().getName() + "-board");
-        if (sidebar != null) {
-            if (getTitle() != null) {
-                if (!getTitle().equals(sidebar.getDisplayName())) {
-                    sidebar.setDisplayName(getTitle());
-                }
-                if (!getLines().isEmpty()) {
-                    for (int i = 0; i < getLines().size(); i++) {
-                        sidebar.getScore(getLines().get(i)).setScore(i);
-                    }
-                }
-            }
-        } else create();
-    }
-    private void create() {
+    @Override
+    public void run() {
         if (getTitle() != null) {
             var scoreboard = getNewScoreboard();
-            var sidebar = scoreboard.registerNewObjective(getPlayer().getName() + "-board", "yummy", getTitle());
-            sidebar.setDisplaySlot(DisplaySlot.SIDEBAR);
+            var objective = scoreboard.registerNewObjective(getPlayer().getUniqueId() + "_board", "yummy", getTitle());
+            objective.setDisplaySlot(DisplaySlot.SIDEBAR);
             if (!getInstance().isBukkit()) {
-                sidebar.numberFormat(getInstance().getPaperHandler().getBlank());
+                objective.numberFormat(getInstance().getPaperHandler().getBlank());
             }
             if (!getLines().isEmpty()) {
                 for (int i = 0; i < getLines().size(); i++) {
-                    sidebar.getScore(getLines().get(i)).setScore(i);
+                    objective.getScore(getLines().get(i)).setScore(i);
                 }
             }
             getPlayer().setScoreboard(scoreboard);
         }
-    }
-    @Override
-    public void run() {
-        update();
     }
     @Override
     public Player getPlayer() {

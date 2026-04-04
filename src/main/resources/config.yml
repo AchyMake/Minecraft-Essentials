@@ -9,6 +9,33 @@ spawner:
   lore:
     - "&9Obtained by:"
     - "&fSilk Touch"
+double-jump:
+  # if false permission: 'essentials.event.double_jump'
+  enable: false
+  standing:
+    multiply: 0.0
+    y: 0.4
+  sprinting:
+    multiply: 0.4
+    y: 0.4
+  forward:
+    multiply: 0.2
+    y: 0.4
+  backward:
+    multiply: -0.2
+    y: 0.4
+  particle:
+    enable: true
+    type: SOUL
+    offsetX: 0.3
+    offsetY: 0.2
+    offsetZ: 0.3
+    count: 25
+  sound:
+    enable: true
+    type: ENTITY_VEX_AMBIENT
+    volume: 2.5
+    pitch: 1.0
 chat:
   format:
     # permission: 'essentials.event.chat.group.default'

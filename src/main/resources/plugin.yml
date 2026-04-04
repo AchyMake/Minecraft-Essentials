@@ -994,3 +994,6 @@ permissions:
   essentials.event.quit.notify:
     description: notifies quit event
     default: op
+  essentials.event.double_jump:
+    description: allows to double jump
+    default: false

@@ -50,7 +50,7 @@ public class LuckPermsProvider {
             weights.put(player, getWeight(player));
         }
         var listed = new ArrayList<>(weights.entrySet());
-        listed.sort(Collections.reverseOrder(Map.Entry.comparingByValue()));
+        listed.sort(Map.Entry.comparingByValue());
         return listed.stream().toList();
     }
     public UserManager getUserManager() {
