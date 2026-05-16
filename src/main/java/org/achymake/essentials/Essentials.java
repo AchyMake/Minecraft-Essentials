@@ -250,7 +250,6 @@ public final class Essentials extends JavaPlugin {
         }
     }
     public void PaperEvents() {
-        if (isBukkit())return;
         new AsyncPlayerSpawnLocation();
         new PlayerShearBlock();
     }
