@@ -30,9 +30,6 @@ public class ScoreboardHandler {
     public ScoreboardManager getScoreboardManager() {
         return getInstance().getScoreboardManager();
     }
-    public Scoreboard getMainScoreboard() {
-        return getScoreboardManager().getMainScoreboard();
-    }
     public Scoreboard getNewScoreboard() {
         return getScoreboardManager().getNewScoreboard();
     }

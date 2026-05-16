@@ -82,8 +82,10 @@ public class MaterialHandler {
      * @since many moons ago
      */
     public boolean hasEnchantment(ItemStack itemStack, String enchantmentName) {
-        if (isEnchantment(enchantmentName) && itemStack != null) {
-            return itemStack.getItemMeta().hasEnchant(getEnchantment(enchantmentName));
+        if (itemStack != null) {
+            if (isEnchantment(enchantmentName)) {
+                return itemStack.getItemMeta().hasEnchant(getEnchantment(enchantmentName));
+            } else return false;
         } else return false;
     }
     /**

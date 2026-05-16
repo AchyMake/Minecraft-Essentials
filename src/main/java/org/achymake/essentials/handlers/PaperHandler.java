@@ -8,14 +8,15 @@ import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
-import java.util.UUID;
-
 public class PaperHandler {
     private Essentials getInstance() {
         return Essentials.getInstance();
     }
     private MaterialHandler getMaterialHandler() {
         return getInstance().getMaterialHandler();
+    }
+    private UUIDHandler getUUIDHandler() {
+        return getInstance().getUUIDHandler();
     }
     public InventoryView openAnvil(Player player) {
         return player.openAnvil(null, true);
@@ -42,7 +43,7 @@ public class PaperHandler {
         var skullItem = getMaterialHandler().getItemStack("player_head", amount);
         var skullMeta = (SkullMeta) skullItem.getItemMeta();
         if (16 >= skullName.length()) {
-            var profile = getInstance().getServer().createProfile(UUID.randomUUID(), skullName);
+            var profile = getInstance().getServer().createProfile(getUUIDHandler().getRandom(), skullName);
             profile.setProperty(new ProfileProperty("textures", key));
             profile.update();
             skullMeta.setPlayerProfile(profile);

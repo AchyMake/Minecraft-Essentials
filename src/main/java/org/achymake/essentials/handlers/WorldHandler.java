@@ -64,8 +64,7 @@ public class WorldHandler {
         if (world != null) {
             var item = world.createEntity(location, Item.class);
             item.setItemStack(itemStack);
-            world.addEntity(item);
-            return item;
+            return world.addEntity(item);
         } else return null;
     }
     /**
@@ -91,8 +90,9 @@ public class WorldHandler {
      */
     public void teleport(Player player, Location location, String name, int seconds) {
         if (!getUserdata().hasTaskID(player, "teleport")) {
-            if (!location.getChunk().isLoaded()) {
-                location.getChunk().load();
+            var chunk = location.getChunk();
+            if (!chunk.isLoaded()) {
+                chunk.load();
             }
             if (seconds > 0) {
                 getMessage().sendActionBar(player, getMessage().get("events.teleport.post", String.valueOf(seconds)));

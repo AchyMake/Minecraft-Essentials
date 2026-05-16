@@ -6,7 +6,7 @@
 
     <groupId>org.achymake</groupId>
     <artifactId>Essentials</artifactId>
-    <version>1.1.43</version>
+    <version>26.1.2-144</version>
     <packaging>jar</packaging>
 
     <name>Essentials</name>
@@ -14,7 +14,7 @@
     <url>https://github.com/AchyMake/Minecraft-Essentials</url>
 
     <properties>
-        <java.version>21</java.version>
+        <java.version>25</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -71,7 +71,7 @@
         <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
-            <version>1.21.11-R0.1-SNAPSHOT</version>
+            <version>26.1.2.build.63-stable</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

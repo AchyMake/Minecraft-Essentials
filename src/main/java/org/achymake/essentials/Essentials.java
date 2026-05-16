@@ -84,7 +84,10 @@ public final class Essentials extends JavaPlugin {
         servicesManager = getServer().getServicesManager();
         pluginManager = getServer().getPluginManager();
         commands();
-        events();
+        BukkitEvents();
+        if (!isBukkit()) {
+            PaperEvents();
+        }
         reload();
         new VaultEconomyProvider(this).register();
         new PlaceholderProvider().register();
@@ -180,7 +183,7 @@ public final class Essentials extends JavaPlugin {
         new WorkbenchCommand();
         new WorthCommand();
     }
-    private void events() {
+    private void BukkitEvents() {
         new AsyncPlayerChat();
         new BellRing();
         new BlockBreak();
@@ -233,10 +236,6 @@ public final class Essentials extends JavaPlugin {
         new PlayerQuit();
         new PlayerRespawn();
         new PlayerShearEntity();
-        if (!isBukkit()) {
-            new AsyncPlayerSpawnLocation();
-            new PlayerShearBlock();
-        } else new PlayerSpawnLocation();
         new PlayerTakeLecternBook();
         new PlayerTeleport();
         new PlayerToggleFlight();
@@ -246,6 +245,14 @@ public final class Essentials extends JavaPlugin {
         new ProjectileLaunch();
         new SignChange();
         new VehicleCreate();
+        if (isBukkit()) {
+            new PlayerSpawnLocation();
+        }
+    }
+    public void PaperEvents() {
+        if (isBukkit())return;
+        new AsyncPlayerSpawnLocation();
+        new PlayerShearBlock();
     }
     public void reload() {
         getTablistHandler().disable();

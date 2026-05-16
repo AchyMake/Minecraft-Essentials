@@ -4,8 +4,7 @@ import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.achymake.essentials.Essentials;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class PlaceholderProvider extends PlaceholderExpansion {
     @Override

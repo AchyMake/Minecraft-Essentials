@@ -27,19 +27,16 @@ public class InventoryHandler {
     private PaperHandler getPaperHandler() {
         return getInstance().getPaperHandler();
     }
-    private boolean isBukkit() {
-        return getInstance().isBukkit();
-    }
     public Inventory create(int size, String title) {
         return getInstance().getServer().createInventory(null, size, getMessage().addColor(title));
     }
     public InventoryView openAnvil(Player player) {
-        if (!isBukkit()) {
+        if (!getInstance().isBukkit()) {
             return getPaperHandler().openAnvil(player);
         } else return null;
     }
     public InventoryView openCartographyTable(Player player) {
-        if (!isBukkit()) {
+        if (!getInstance().isBukkit()) {
             return getPaperHandler().openCartographyTable(player);
         } else return null;
     }
@@ -50,22 +47,22 @@ public class InventoryHandler {
         return player.openInventory(target.getEnderChest());
     }
     public InventoryView openGrindstone(Player player) {
-        if (!isBukkit()) {
+        if (!getInstance().isBukkit()) {
             return getPaperHandler().openGrindstone(player);
         } else return null;
     }
     public InventoryView openLoom(Player player) {
-        if (!isBukkit()) {
+        if (!getInstance().isBukkit()) {
             return getPaperHandler().openLoom(player);
         } else return null;
     }
     public InventoryView openSmithingTable(Player player) {
-        if (!isBukkit()) {
+        if (!getInstance().isBukkit()) {
             return getPaperHandler().openSmithingTable(player);
         } else return null;
     }
     public InventoryView openStonecutter(Player player) {
-        if (!isBukkit()) {
+        if (!getInstance().isBukkit()) {
             return getPaperHandler().openStonecutter(player);
         } else return null;
     }
