@@ -49,7 +49,7 @@ public class PlayerLogin implements Listener {
                                 } else allow(event, player);
                             } else allow(event, player);
                         } else allow(event, player);
-                    } else event.disallow(PlayerLoginEvent.Result.KICK_FULL, getConfig().getString("connection.login.full"));
+                    } else event.disallow(PlayerLoginEvent.Result.KICK_FULL, getMessage().addColor(getConfig().getString("connection.login.full")));
                 } else if (getUserdata().exists(player)) {
                     if (getUserdata().isBanned(player)) {
                         if (!getInstance().getDateHandler().expired(getUserdata().getBanExpire(player))) {
@@ -57,7 +57,7 @@ public class PlayerLogin implements Listener {
                         } else allow(event, player);
                     } else allow(event, player);
                 } else allow(event, player);
-            } else event.disallow(PlayerLoginEvent.Result.KICK_WHITELIST, getConfig().getString("connection.login.whitelisted"));
+            } else event.disallow(PlayerLoginEvent.Result.KICK_WHITELIST, getMessage().addColor(getConfig().getString("connection.login.whitelisted")));
         } else if (server.getOnlinePlayers().size() >= server.getMaxPlayers()) {
             if (player.hasPermission("essentials.event.login.full_server")) {
                 if (getUserdata().exists(player)) {
@@ -67,7 +67,7 @@ public class PlayerLogin implements Listener {
                         } else allow(event, player);
                     } else allow(event, player);
                 } else allow(event, player);
-            } else event.disallow(PlayerLoginEvent.Result.KICK_FULL, getConfig().getString("connection.login.full"));
+            } else event.disallow(PlayerLoginEvent.Result.KICK_FULL, getMessage().addColor(getConfig().getString("connection.login.full")));
         } else if (getUserdata().exists(player)) {
             if (getUserdata().isBanned(player)) {
                 if (!getInstance().getDateHandler().expired(getUserdata().getBanExpire(player))) {
