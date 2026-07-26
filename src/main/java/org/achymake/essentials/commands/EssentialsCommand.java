@@ -65,6 +65,7 @@ public class EssentialsCommand implements CommandExecutor, TabCompleter {
                     } else if (args[1].equalsIgnoreCase("bank")) {
                         getInstance().getBank().reload();
                         consoleCommandSender.sendMessage(getInstance().name() + ": reloaded > bank");
+                        return true;
                     }
                 }
             }
