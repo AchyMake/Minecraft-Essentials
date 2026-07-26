@@ -651,6 +651,7 @@ public class EntityHandler {
         new SQUID().reload();
         new STRAY().reload();
         new STRIDER().reload();
+        new SULFUR_CUBE().reload();
         new TADPOLE().reload();
         new TEXT_DISPLAY().reload();
         new TNT().reload();

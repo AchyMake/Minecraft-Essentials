@@ -4,7 +4,6 @@ import org.achymake.essentials.Essentials;
 import org.achymake.essentials.data.Userdata;
 import org.achymake.essentials.handlers.ScoreboardHandler;
 import org.achymake.essentials.handlers.TablistHandler;
-import org.achymake.essentials.handlers.WorldHandler;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -24,9 +23,6 @@ public class PlayerChangedWorld implements Listener {
     private ScoreboardHandler getScoreboardHandler() {
         return getInstance().getScoreboardHandler();
     }
-    private WorldHandler getWorldHandler() {
-        return getInstance().getWorldHandler();
-    }
     private PluginManager getPluginManager() {
         return getInstance().getPluginManager();
     }
@@ -42,6 +38,5 @@ public class PlayerChangedWorld implements Listener {
             getScoreboardHandler().disable(player);
             getScoreboardHandler().apply(player);
         }
-        getUserdata().setBoolean(player, "settings.pvp", getWorldHandler().isPVP(player.getWorld()));
     }
 }
