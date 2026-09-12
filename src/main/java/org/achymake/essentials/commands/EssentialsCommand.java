@@ -43,6 +43,7 @@ public class EssentialsCommand implements CommandExecutor, TabCompleter {
                     } else if (args[1].equalsIgnoreCase("bank")) {
                         getInstance().getBank().reload();
                         player.sendMessage(getMessage().addColor("&6" + getInstance().name() + "&f: reloaded > bank"));
+                        return true;
                     }
                 }
             }
