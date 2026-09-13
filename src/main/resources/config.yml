@@ -5,7 +5,7 @@ server:
     line-1: "Minecraft Server"
     line-2: ""
 spawner:
-  display: "&dSpawner&f: {entity_type}"
+  display: "&dSpawner&f: %entity_type%"
   lore:
     - "&9Obtained by:"
     - "&fSilk Touch"
