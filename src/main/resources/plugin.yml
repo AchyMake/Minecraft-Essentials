@@ -1,7 +1,7 @@
 name: Essentials
 version: '${project.version}'
 main: org.achymake.essentials.Essentials
-api-version: '26.2'
+api-version: '26.3'
 prefix: '${project.name}'
 load: STARTUP
 depend:
@@ -546,6 +546,9 @@ permissions:
     default: op
   essentials.command.essentials:
     description: essentials main command
+    default: op
+  essentials.command.essentials.reload:
+    description: essentials reload command
     default: op
   essentials.command.feed:
     description: satisfy hunger by command

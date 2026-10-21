@@ -30,20 +30,24 @@ public class EssentialsCommand implements CommandExecutor, TabCompleter {
                 return true;
             } else if (args.length == 1) {
                 if (args[0].equalsIgnoreCase("reload")) {
-                    getInstance().reload();
-                    player.sendMessage(getMessage().addColor("&6" + getInstance().name() + "&f: reloaded"));
-                    return true;
+                    if (player.hasPermission("essentials.command.essentials.reload")) {
+                        getInstance().reload();
+                        player.sendMessage(getMessage().addColor("&6" + getInstance().name() + "&f: reloaded"));
+                        return true;
+                    }
                 }
             } else if (args.length == 2) {
                 if (args[0].equalsIgnoreCase("reload")) {
-                    if (args[1].equalsIgnoreCase("userdata")) {
-                        getInstance().reloadUserdata();
-                        player.sendMessage(getMessage().addColor("&6" + getInstance().name() + "&f: reloaded > userdata"));
-                        return true;
-                    } else if (args[1].equalsIgnoreCase("bank")) {
-                        getInstance().getBank().reload();
-                        player.sendMessage(getMessage().addColor("&6" + getInstance().name() + "&f: reloaded > bank"));
-                        return true;
+                    if (player.hasPermission("essentials.command.essentials.reload")) {
+                        if (args[1].equalsIgnoreCase("userdata")) {
+                            getInstance().reloadUserdata();
+                            player.sendMessage(getMessage().addColor("&6" + getInstance().name() + "&f: reloaded > userdata"));
+                            return true;
+                        } else if (args[1].equalsIgnoreCase("bank")) {
+                            getInstance().getBank().reload();
+                            player.sendMessage(getMessage().addColor("&6" + getInstance().name() + "&f: reloaded > bank"));
+                            return true;
+                        }
                     }
                 }
             }

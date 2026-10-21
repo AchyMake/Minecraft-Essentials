@@ -6,7 +6,7 @@
 
     <groupId>org.achymake</groupId>
     <artifactId>Essentials</artifactId>
-    <version>26.2-147</version>
+    <version>26.3-148</version>
     <packaging>jar</packaging>
 
     <name>Essentials</name>
@@ -71,7 +71,7 @@
         <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
-            <version>26.2.build.123-stable</version>
+            <version>26.3.build.209-stable</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
